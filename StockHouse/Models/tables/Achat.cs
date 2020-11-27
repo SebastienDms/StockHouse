@@ -9,12 +9,15 @@ namespace StockHouse.Models
         public int Prix { get; set; }
         public int Quantité { get; set; }
         public DateTime DateAchat { get; set; }
-        [ForeignKey("Utilisateur")]
+        //[ForeignKey("Utilisateur")]
         public int UserId { get; set; }
-        [ForeignKey("Magasin")]
+        public User User { get; set; }
+        //[ForeignKey("Magasin")]
         public int MagasinId { get; set; }
-        [ForeignKey("Produit")]
+        public Magasin Magasin { get; set; }
+        //[ForeignKey("Produit")]
         public int ProduitId { get; set; }
+        public Produit Produit { get; set; }
 
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace StockHouse.Models
 {
@@ -11,5 +12,8 @@ namespace StockHouse.Models
         public string Marque { get; set; }
         [ForeignKey("Piece")]
         public int PieceId { get; set; }
+        public Piece Piece { get; set; }
+
+        public ICollection<Achat> Achats { get; set; }
     }
 }

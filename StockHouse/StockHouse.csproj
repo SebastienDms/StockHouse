@@ -131,12 +131,18 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Achat.cs" />
-    <Compile Include="Models\IModel.cs" />
-    <Compile Include="Models\Magasin.cs" />
-    <Compile Include="Models\Piece.cs" />
-    <Compile Include="Models\Produit.cs" />
-    <Compile Include="Models\User.cs" />
+    <Compile Include="Migrations\202011272036208_CreateDB.cs" />
+    <Compile Include="Migrations\202011272036208_CreateDB.designer.cs">
+      <DependentUpon>202011272036208_CreateDB.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\BdStockHouse.cs" />
+    <Compile Include="Models\tables\Achat.cs" />
+    <Compile Include="Models\tables\IModel.cs" />
+    <Compile Include="Models\tables\Magasin.cs" />
+    <Compile Include="Models\tables\Piece.cs" />
+    <Compile Include="Models\tables\Produit.cs" />
+    <Compile Include="Models\tables\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -191,6 +197,11 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202011272036208_CreateDB.resx">
+      <DependentUpon>202011272036208_CreateDB.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

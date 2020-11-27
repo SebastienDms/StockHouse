@@ -9,5 +9,6 @@ namespace StockHouse.Models
     {
         public int Id { get; set; }
         public string Nom { get; set; }
+        public ICollection<Produit> Produits { get; set; }
     }
 }
