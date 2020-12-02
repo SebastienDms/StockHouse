@@ -298,6 +298,7 @@
     <Content Include="Views\Magasin\Index.cshtml" />
     <Content Include="Views\Produit\Index.cshtml" />
     <Content Include="Views\User\Index.cshtml" />
+    <Content Include="Views\Piece\ToutesLesPieces.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
