@@ -9,6 +9,8 @@ namespace StockHouse.Controllers
     public class UserController : Controller
     {
         // GET: User
+        [Route("User/Index")]
+
         public ActionResult Index()
         {
             return View();

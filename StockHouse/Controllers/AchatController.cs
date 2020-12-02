@@ -9,6 +9,8 @@ namespace StockHouse.Controllers
     public class AchatController : Controller
     {
         // GET: Achat
+        [Route("Achat/Index")]
+
         public ActionResult Index()
         {
             return View();

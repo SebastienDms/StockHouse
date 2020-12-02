@@ -9,6 +9,8 @@ namespace StockHouse.Controllers
     public class MagasinController : Controller
     {
         // GET: Magasin
+        [Route("Magasin/Index")]
+
         public ActionResult Index()
         {
             return View();

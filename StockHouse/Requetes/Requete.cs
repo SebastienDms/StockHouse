@@ -9,7 +9,8 @@ using StockHouse.Models;
 namespace StockHouse.Requetes
 {
     public class Requete<T> : IRequete
-        where T : class, IModel, new()
+	/* Le type T doit être une classe, implémenter l'interface IModel et doit avoir un constructeur public */
+        where T : class, IModel, new() 
     {
 		protected readonly DbSet<T> Table;
 		protected readonly BdStockHouse Bdd;
