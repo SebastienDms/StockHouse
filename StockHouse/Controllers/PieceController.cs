@@ -19,6 +19,7 @@ namespace StockHouse.Controllers
         {
             return View();
         }
+
         [HttpGet]
         [Route("Piece/Toutes-les-pieces")]
         public async Task<ActionResult> ToutesLesPieces()
@@ -27,12 +28,14 @@ namespace StockHouse.Controllers
 
             return View(listPieces);
         }
+
         [HttpGet]
         [Route("Piece/Ajouter-une-piece")]
         public ActionResult AjouterUnePiece()
         {
             return View();
         }
+
         [HttpPost]
         //[Route("Piece/Ajouter-piece")]
         public async Task<ActionResult> AjouterPiece(string nom)
@@ -45,12 +48,14 @@ namespace StockHouse.Controllers
 
             return RedirectToAction("Index","Piece");
         }
+
         [HttpGet]
         [Route("Piece/Chercher-une-piece")]
         public ActionResult ChercherUnePiece()
         {
             return View();
         }
+
         [HttpPost]
         [Route("Piece/Modifier-une-piece")]
         public async Task<ActionResult> ModifierUnePiece(string idcherche)
@@ -62,6 +67,7 @@ namespace StockHouse.Controllers
 
             return View(searchPiece);
         }
+
         [HttpPost]
         //[Route("")]
         public ActionResult ModifierPiece(int idModif, string nomModif)
