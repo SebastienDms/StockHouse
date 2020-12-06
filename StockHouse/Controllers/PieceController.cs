@@ -71,5 +71,20 @@ namespace StockHouse.Controllers
 
             return RedirectToAction("Index", "Piece");
         }
+
+        [HttpGet]
+        [Route("Piece/Supprimer-une-piece")]
+        public async Task<ActionResult> SupprimerUnePiece()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> SupprimerPiece(int idSupprimer)
+        {
+            await _requetes.DeleteAsync(idSupprimer);
+
+            return RedirectToAction("Index", "Piece");
+        }
     }
 }

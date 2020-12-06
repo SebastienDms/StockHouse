@@ -302,6 +302,7 @@
     <Content Include="Views\Piece\AjouterUnePiece.cshtml" />
     <Content Include="Views\Piece\ModifierUnePiece.cshtml" />
     <Content Include="Views\Piece\ChercherUnePiece.cshtml" />
+    <Content Include="Views\Piece\SupprimerUnePiece.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

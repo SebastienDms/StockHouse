@@ -125,15 +125,45 @@ namespace StockHouse.Requetes
 
         /*********************************************************/
         /* UPDATE */
-        public void UpdatePiece(Piece modifPiece)
+        public async void UpdatePiece(Piece modifPiece)
         {
-            Piece updatePiece = (from p in Bdd.Pieces
+            var updatePiece = await (from p in Bdd.Pieces
                 where p.Id == modifPiece.Id
-                select p).SingleOrDefault();
+                select p).FirstOrDefaultAsync();
 
             updatePiece.Nom = modifPiece.Nom;
 
-            Bdd.SaveChanges();
+            await Bdd.SaveChangesAsync();
         }
-	}
+        public async void UpdateUser(User modifUser)
+        {
+            var updateUser = await (from p in Bdd.Users
+                where p.Id == modifUser.Id
+                select p).FirstOrDefaultAsync();
+
+            updateUser.Nom = modifUser.Nom;
+
+            await Bdd.SaveChangesAsync();
+        }
+        public async void UpdateMagasin(Magasin modifMagasin)
+        {
+            var updateMagasin = await (from p in Bdd.Magasins
+                where p.Id == modifMagasin.Id
+                select p).FirstOrDefaultAsync();
+
+            updateMagasin.Nom = modifMagasin.Nom;
+
+            await Bdd.SaveChangesAsync();
+        }
+        public async void UpdateProduit(Produit modifProduit)
+        {
+            var updateProduit = await (from p in Bdd.Produits
+                where p.Id == modifProduit.Id
+                select p).FirstOrDefaultAsync();
+
+            updateProduit.Nom = modifProduit.Nom;
+
+            await Bdd.SaveChangesAsync();
+        }
+    }
 }
