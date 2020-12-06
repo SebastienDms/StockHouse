@@ -21,7 +21,13 @@ namespace StockHouse.Requetes
             Table = Bdd.Set<T>();
         }
 
-		public void Dispose()
+        public async Task<int> Save()
+        {
+            int id = await Bdd.SaveChangesAsync();
+
+            return id;
+        }
+        public void Dispose()
 		{
 			Bdd.Dispose();
 		}
@@ -33,7 +39,7 @@ namespace StockHouse.Requetes
 		 */
 		public virtual T GetById(int id)
 		{
-			return Table.Find(id);
+            return Table.Find(id);
 		}
 
 		/**
@@ -116,5 +122,18 @@ namespace StockHouse.Requetes
 		{
 			return await Task.Run(() => Delete(id));
 		}
+
+        /*********************************************************/
+        /* UPDATE */
+        public void UpdatePiece(Piece modifPiece)
+        {
+            Piece updatePiece = (from p in Bdd.Pieces
+                where p.Id == modifPiece.Id
+                select p).SingleOrDefault();
+
+            updatePiece.Nom = modifPiece.Nom;
+
+            Bdd.SaveChanges();
+        }
 	}
 }

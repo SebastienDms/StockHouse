@@ -1,0 +1,19 @@
+﻿@model StockHouse.Models.Piece
+@{
+    ViewBag.Title = "ModifierUnePiece";
+}
+
+<h2>Modifier une pièce</h2>
+
+@using (Html.BeginForm("ModifierPiece", "Piece", FormMethod.Post))
+{
+    <div class="form-group">
+        <label>Nom:</label>
+        <input type="text" name="idModif" id="idModif" value="@Model.Id" readonly/>
+    </div>
+    <div class="form-group">
+        <label>Nom:</label>
+        <input type="text" name="nomModif" id="nomModif" value="@Model.Nom"/>
+    </div>
+    <button type="submit" class="btn btn-primary">Modifier</button>
+}

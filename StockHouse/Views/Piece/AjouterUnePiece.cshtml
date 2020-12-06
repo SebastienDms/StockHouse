@@ -1,0 +1,15 @@
+﻿
+@{
+    ViewBag.Title = "Ajouter une pièce";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm("AjouterPiece", "Piece", FormMethod.Post))
+{
+    <div class="form-group">
+        <label>Nom:</label>
+        <input type="text" name="nom" id="nom" />
+    </div>
+    <button type="submit" class="btn btn-primary">Ajouter</button>
+}

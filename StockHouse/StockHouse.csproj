@@ -299,6 +299,9 @@
     <Content Include="Views\Produit\Index.cshtml" />
     <Content Include="Views\User\Index.cshtml" />
     <Content Include="Views\Piece\ToutesLesPieces.cshtml" />
+    <Content Include="Views\Piece\AjouterUnePiece.cshtml" />
+    <Content Include="Views\Piece\ModifierUnePiece.cshtml" />
+    <Content Include="Views\Piece\ChercherUnePiece.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

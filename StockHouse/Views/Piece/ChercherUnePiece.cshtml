@@ -1,0 +1,15 @@
+﻿
+@{
+    ViewBag.Title = "ChercherPiece";
+}
+
+<h2>Chercher la pièce à modifier</h2>
+
+@using (Html.BeginForm("ModifierUnePiece", "Piece", FormMethod.Post))
+{
+    <div class="form-group">
+        <label>Id:</label>
+        <input type="text" name="idcherche" id="idcherche" />
+    </div>
+    <button type="submit" class="btn btn-primary">Chercher</button>
+}
