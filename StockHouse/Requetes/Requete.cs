@@ -5,12 +5,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using StockHouse.Models;
+using StockHouse.Models.tables;
 
 namespace StockHouse.Requetes
 {
     public class Requete<T> : IRequete
-	/* Le type T doit être une classe, implémenter l'interface IModel et doit avoir un constructeur public */
-        where T : class, IModel, new() 
+	/* Le type T doit être une classe, implémenter l'interface IModelBase et doit avoir un constructeur public */
+        where T : class, IModelBase, new() 
     {
 		protected readonly DbSet<T> Table;
 		protected readonly BdStockHouse Bdd;
@@ -164,6 +165,41 @@ namespace StockHouse.Requetes
             updateProduit.Nom = modifProduit.Nom;
 
             await Bdd.SaveChangesAsync();
+        }
+        /*********************************************************/
+        /* UPDATE */
+        public async Task<bool> MailExist(string email)
+        {
+            return await Bdd.Users.AnyAsync(user => string.Compare(user.AdresseMail, email) == 0);
+        }
+        /* test nom existe générique -> IModelNom pour utiliser le champ Nom des tables */
+        public async Task<bool> NameExist<TNom>(Piece testPiece)
+            /* Précise IModelNom pour accéder à la propriété Nom  */
+            where TNom : class, IModelNom, new()
+        {
+            DbSet<TNom> TableNom = Bdd.Set<TNom>();
+
+            return await TableNom.AnyAsync(table => string.Compare(table.Nom, testPiece.Nom, StringComparison.CurrentCultureIgnoreCase) == 0);
+        }
+
+        public bool NamePieceExist(Piece testPiece) //async Task<bool>
+        {
+            bool exist = false;
+            //BdStockHouse bdStockHouse = new BdStockHouse();
+
+            var list = Bdd.Pieces.Select(p => p.Nom).ToList();
+
+            foreach (var element in list)
+            {
+                if (element == testPiece.Nom)
+                {
+                    exist = true;
+                    break;
+                }
+            }
+
+            return exist;
+            //return await Bdd.Pieces.AnyAsync(table => string.Compare(table.Nom, testPiece.Nom, StringComparison.CurrentCultureIgnoreCase) == 0);
         }
     }
 }

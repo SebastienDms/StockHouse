@@ -14,6 +14,7 @@
     <div class="form-group">
         <label>Nom:</label>
         <input type="text" name="nomModif" id="nomModif" value="@Model.Nom"/>
+        @Html.ValidationMessageFor(m => m.Nom)
     </div>
     <button type="submit" class="btn btn-primary">Modifier</button>
 }

@@ -142,10 +142,15 @@
     <Compile Include="Migrations\202011272036208_CreateDB.designer.cs">
       <DependentUpon>202011272036208_CreateDB.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202012071621390_MAJ-1_add_required.cs" />
+    <Compile Include="Migrations\202012071621390_MAJ-1_add_required.designer.cs">
+      <DependentUpon>202012071621390_MAJ-1_add_required.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BdStockHouse.cs" />
     <Compile Include="Models\tables\Achat.cs" />
-    <Compile Include="Models\tables\IModel.cs" />
+    <Compile Include="Models\tables\IModelBase.cs" />
+    <Compile Include="Models\tables\IModelNom.cs" />
     <Compile Include="Models\tables\Magasin.cs" />
     <Compile Include="Models\tables\Piece.cs" />
     <Compile Include="Models\tables\Produit.cs" />
@@ -303,6 +308,7 @@
     <Content Include="Views\Piece\ModifierUnePiece.cshtml" />
     <Content Include="Views\Piece\ChercherUnePiece.cshtml" />
     <Content Include="Views\Piece\SupprimerUnePiece.cshtml" />
+    <Content Include="Views\Piece\AjouterPiece.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -315,6 +321,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202011272036208_CreateDB.resx">
       <DependentUpon>202011272036208_CreateDB.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202012071621390_MAJ-1_add_required.resx">
+      <DependentUpon>202012071621390_MAJ-1_add_required.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

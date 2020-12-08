@@ -30,23 +30,37 @@ namespace StockHouse.Controllers
         }
 
         [HttpGet]
-        [Route("Piece/Ajouter-une-piece")]
-        public ActionResult AjouterUnePiece()
+        [Route("Piece/Ajouter-piece")]
+        public ActionResult AjouterPiece()
         {
             return View();
         }
 
         [HttpPost]
-        //[Route("Piece/Ajouter-piece")]
-        public async Task<ActionResult> AjouterPiece(string nom)
+        [Route("Piece/Ajouter-une-piece")]
+        public async Task<ActionResult> AjouterUnePiece(Piece newPiece)
         {
-            Piece newPiece = new Piece();
-            newPiece.Nom = nom;
+            if (!ModelState.IsValid)
+            {
+                return View(newPiece);
+            }
+            else
+            {
+                if (_requetes.NamePieceExist(newPiece))
+                {
+                    ModelState.AddModelError("Nom", "Ce nom de pièce existe déjà!");
+                    return View(newPiece);
+                }
+                else
+                {
+                    //Piece newPiece = new Piece();
+                    //newPiece.Nom = nom;
+                    await _requetes.AddAsync(newPiece);
+                    var id = await _requetes.Save();
 
-            await _requetes.AddAsync(newPiece);
-            var id = await _requetes.Save();
-
-            return RedirectToAction("Index","Piece");
+                    return RedirectToAction("Index","Piece");
+                }
+            }
         }
 
         [HttpGet]
@@ -69,7 +83,6 @@ namespace StockHouse.Controllers
         }
 
         [HttpPost]
-        //[Route("")]
         public ActionResult ModifierPiece(int idModif, string nomModif)
         {
             Piece modifPiece = new Piece {Id = idModif, Nom = nomModif};
