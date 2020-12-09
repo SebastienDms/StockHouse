@@ -126,6 +126,14 @@ namespace StockHouse.Requetes
 
         /*********************************************************/
         /* UPDATE */
+        public virtual async Task<int> UpdateAsync(T newModel)
+        {
+            var updateElement = await GetByIdAsync(newModel.Id);
+
+            Bdd.Entry(updateElement).CurrentValues.SetValues(newModel);
+
+            return await Bdd.SaveChangesAsync();
+        }
         public async Task<int> UpdatePiece(Piece modifPiece)
         {
             var updatePiece = await (from p in Bdd.Pieces

@@ -74,23 +74,47 @@ namespace StockHouse.Controllers
 
         [HttpPost]
         [Route("Piece/Modifier-une-piece")]
-        public async Task<ActionResult> ModifierUnePiece(string idcherche)
+        public async Task<ActionResult> ModifierUnePiece(Piece wantedPiece)
         {
-            int Id;
-            int.TryParse(idcherche, out Id);
+            if (wantedPiece.Id == 0)
+            {
+                ModelState.AddModelError("Id", "Veuillez saisir un ID!");
+                return View("ChercherUnePiece");
+            }
+            else
+            {
+                var searchPiece = await _requetes.GetByIdAsync(wantedPiece.Id);
 
-            var searchPiece = await _requetes.GetByIdAsync(Id);
-
-            return View(searchPiece);
+                if (searchPiece == null)
+                {
+                    ModelState.AddModelError("Id", "Cet ID n'existe pas!");
+                    return View("ChercherUnePiece");
+                }
+                return View(searchPiece);
+            }
         }
 
         [HttpPost]
-        public async Task<ActionResult> ModifierPiece(int idModif, string nomModif)
+        [Route("Piece/Modifier-piece")]
+        public async Task<ActionResult> ModifierPiece(Piece modifPiece)
         {
-            Piece modifPiece = new Piece {Id = idModif, Nom = nomModif};
-            await _requetes.UpdatePiece(modifPiece);
+            if (!ModelState.IsValid)
+            {
+                return View(modifPiece);
+            }
+            else
+            {
 
-            return RedirectToAction("Index", "Piece");
+                var resultat = await _requetes.UpdateAsync(modifPiece);
+
+                if (resultat == 0)
+                {
+                    ModelState.AddModelError("Nom", "Ce nom est le nom actuel!");
+                    return View(modifPiece);
+                }
+
+                return RedirectToAction("Index", "Piece");
+            }
         }
 
         [HttpGet]

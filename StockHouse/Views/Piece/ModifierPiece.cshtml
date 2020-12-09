@@ -1,19 +1,20 @@
 ﻿@model StockHouse.Models.Piece
 @{
-    ViewBag.Title = "ModifierUnePiece";
+    ViewBag.Title = "ModifierPiece";
 }
 
-<h2>Modifier une pièce</h2>
+<h2>ModifierPiece</h2>
 
 @using (Html.BeginForm("ModifierPiece", "Piece", FormMethod.Post))
 {
     <div class="form-group">
         <label>ID:</label>
-        @Html.TextBoxFor(p=>p.Id, new {@value=Model.Id, @readonly="true"})
+        @Html.TextBoxFor(p => p.Id, new { @value = Model.Id, @readonly = "true" })
     </div>
     <div class="form-group">
         <label>Nom:</label>
-        @Html.TextBoxFor(p=>p.Nom, new {@value=Model.Nom})
+        @Html.TextBoxFor(p => p.Nom, new { @value = Model.Nom })
+        @Html.ValidationMessageFor(p => p.Nom)
     </div>
     <button type="submit" class="btn btn-primary">Modifier</button>
 }

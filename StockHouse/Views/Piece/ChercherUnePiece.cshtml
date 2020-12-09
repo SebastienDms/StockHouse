@@ -1,4 +1,4 @@
-﻿
+﻿@model StockHouse.Models.Piece
 @{
     ViewBag.Title = "ChercherPiece";
 }
@@ -9,7 +9,8 @@
 {
     <div class="form-group">
         <label>Id:</label>
-        <input type="text" name="idcherche" id="idcherche" />
+        @Html.TextBoxFor(p=>p.Id)
+        @Html.ValidationMessageFor(p => p.Id)
     </div>
     <button type="submit" class="btn btn-primary">Chercher</button>
 }

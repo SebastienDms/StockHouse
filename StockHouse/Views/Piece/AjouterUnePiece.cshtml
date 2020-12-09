@@ -1,5 +1,4 @@
-﻿@*@using StockHouse.Models*@
-@model StockHouse.Models.Piece
+﻿@model StockHouse.Models.Piece
 @{
     ViewBag.Title = "Ajouter une pièce";
 }
@@ -11,7 +10,6 @@
     <div class="form-group">
         <label>Nom:</label>
         @Html.TextBoxFor(p => p.Nom)
-        @*<input type="text" name="nom" id="nom" />*@
         @Html.ValidationMessageFor(p => p.Nom)
     </div>
     <button type="submit" class="btn btn-primary">Ajouter</button>

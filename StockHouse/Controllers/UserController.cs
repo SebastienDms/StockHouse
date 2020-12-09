@@ -50,7 +50,6 @@ namespace StockHouse.Controllers
             }
             else
             {
-                int test;
                 try
                 {
                     await _requetes.AddAsync(newUser);
