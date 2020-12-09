@@ -63,6 +63,10 @@ body {
   background-color: #818182 /*#fff*/;
 }
 
+.field-validation-error {
+    color: darkred;
+}
+
 [tabindex="-1"]:focus:not(:focus-visible) {
   outline: 0 !important;
 }

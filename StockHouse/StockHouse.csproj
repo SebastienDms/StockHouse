@@ -309,6 +309,30 @@
     <Content Include="Views\Piece\ChercherUnePiece.cshtml" />
     <Content Include="Views\Piece\SupprimerUnePiece.cshtml" />
     <Content Include="Views\Piece\AjouterPiece.cshtml" />
+    <Content Include="Views\Achat\TousLesAchats.cshtml" />
+    <Content Include="Views\Achat\AjouterAchat.cshtml" />
+    <Content Include="Views\Achat\AjouterUnAchat.cshtml" />
+    <Content Include="Views\Achat\ChercherUnAchat.cshtml" />
+    <Content Include="Views\Achat\ModifierUnAchat.cshtml" />
+    <Content Include="Views\Achat\SupprimerUnAchat.cshtml" />
+    <Content Include="Views\Magasin\TousLesMagasins.cshtml" />
+    <Content Include="Views\Magasin\AjouterMagasin.cshtml" />
+    <Content Include="Views\Magasin\AjouterUnMagasin.cshtml" />
+    <Content Include="Views\Magasin\ChercherUnMagasin.cshtml" />
+    <Content Include="Views\Magasin\ModifierUnMagasin.cshtml" />
+    <Content Include="Views\Magasin\SupprimerUnMagasin.cshtml" />
+    <Content Include="Views\User\TousLesUsers.cshtml" />
+    <Content Include="Views\User\AjouterUser.cshtml" />
+    <Content Include="Views\User\AjouterUnUser.cshtml" />
+    <Content Include="Views\User\ChercherUnUser.cshtml" />
+    <Content Include="Views\User\ModifierUnUser.cshtml" />
+    <Content Include="Views\User\SupprimerUnUser.cshtml" />
+    <Content Include="Views\Produit\TousLesProduits.cshtml" />
+    <Content Include="Views\Produit\AjouterProduit.cshtml" />
+    <Content Include="Views\Produit\AjouterUnProduit.cshtml" />
+    <Content Include="Views\Produit\ChercherUnProduit.cshtml" />
+    <Content Include="Views\Produit\ModifierUnProduit.cshtml" />
+    <Content Include="Views\Produit\SupprimerUnProduit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

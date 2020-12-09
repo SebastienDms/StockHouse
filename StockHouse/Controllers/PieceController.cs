@@ -31,6 +31,7 @@ namespace StockHouse.Controllers
 
         [HttpGet]
         [Route("Piece/Ajouter-piece")]
+        //[Route("Piece/Ajouter-une-piece")]
         public ActionResult AjouterPiece()
         {
             return View();
@@ -46,7 +47,8 @@ namespace StockHouse.Controllers
             }
             else
             {
-                if (_requetes.NamePieceExist(newPiece))
+                if (_requetes.NameExist<Piece>(newPiece).Result)
+                    //if (_requetes.NamePieceExist(newPiece))
                 {
                     ModelState.AddModelError("Nom", "Ce nom de pièce existe déjà!");
                     return View(newPiece);
@@ -83,10 +85,10 @@ namespace StockHouse.Controllers
         }
 
         [HttpPost]
-        public ActionResult ModifierPiece(int idModif, string nomModif)
+        public async Task<ActionResult> ModifierPiece(int idModif, string nomModif)
         {
             Piece modifPiece = new Piece {Id = idModif, Nom = nomModif};
-            _requetes.UpdatePiece(modifPiece);
+            await _requetes.UpdatePiece(modifPiece);
 
             return RedirectToAction("Index", "Piece");
         }

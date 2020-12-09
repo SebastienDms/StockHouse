@@ -9,12 +9,6 @@
     padding-right: 15px;
 }
 
-/*
-    Afficher Validation client en rouge
-*/
-.field-validation-error {
-    color: red;
-}
 /* Override the default bootstrap behavior where horizontal description lists 
    will truncate terms that are too long to fit in the left column 
 */

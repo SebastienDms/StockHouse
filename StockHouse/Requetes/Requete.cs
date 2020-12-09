@@ -126,7 +126,7 @@ namespace StockHouse.Requetes
 
         /*********************************************************/
         /* UPDATE */
-        public async void UpdatePiece(Piece modifPiece)
+        public async Task<int> UpdatePiece(Piece modifPiece)
         {
             var updatePiece = await (from p in Bdd.Pieces
                 where p.Id == modifPiece.Id
@@ -134,19 +134,19 @@ namespace StockHouse.Requetes
 
             updatePiece.Nom = modifPiece.Nom;
 
-            await Bdd.SaveChangesAsync();
+            return await Bdd.SaveChangesAsync();
         }
-        public async void UpdateUser(User modifUser)
+        public async Task<int> UpdateAchat(Achat modifAchat)
         {
-            var updateUser = await (from p in Bdd.Users
-                where p.Id == modifUser.Id
+            var updateAchat = await (from p in Bdd.Achats
+                where p.Id == modifAchat.Id
                 select p).FirstOrDefaultAsync();
 
-            updateUser.Nom = modifUser.Nom;
+            updateAchat.Prix = modifAchat.Prix;
 
-            await Bdd.SaveChangesAsync();
+            return await Bdd.SaveChangesAsync();
         }
-        public async void UpdateMagasin(Magasin modifMagasin)
+        public async Task<int> UpdateMagasin(Magasin modifMagasin)
         {
             var updateMagasin = await (from p in Bdd.Magasins
                 where p.Id == modifMagasin.Id
@@ -154,9 +154,9 @@ namespace StockHouse.Requetes
 
             updateMagasin.Nom = modifMagasin.Nom;
 
-            await Bdd.SaveChangesAsync();
+            return await Bdd.SaveChangesAsync();
         }
-        public async void UpdateProduit(Produit modifProduit)
+        public async Task<int> UpdateProduit(Produit modifProduit)
         {
             var updateProduit = await (from p in Bdd.Produits
                 where p.Id == modifProduit.Id
@@ -164,10 +164,21 @@ namespace StockHouse.Requetes
 
             updateProduit.Nom = modifProduit.Nom;
 
-            await Bdd.SaveChangesAsync();
+            return await Bdd.SaveChangesAsync();
         }
+        public async Task<int> UpdateUser(User modifUser)
+        {
+            var updateProduit = await (from p in Bdd.Users
+                where p.Id == modifUser.Id
+                select p).FirstOrDefaultAsync();
+
+            updateProduit.Nom = modifUser.Nom;
+
+            return await Bdd.SaveChangesAsync();
+        }
+
         /*********************************************************/
-        /* UPDATE */
+        /* EXIST */
         public async Task<bool> MailExist(string email)
         {
             return await Bdd.Users.AnyAsync(user => string.Compare(user.AdresseMail, email) == 0);
@@ -179,7 +190,10 @@ namespace StockHouse.Requetes
         {
             DbSet<TNom> TableNom = Bdd.Set<TNom>();
 
-            return await TableNom.AnyAsync(table => string.Compare(table.Nom, testPiece.Nom, StringComparison.CurrentCultureIgnoreCase) == 0);
+            /*await TableNom.AnyAsync<TNom>(table => string.Compare(table.Nom, testPiece.Nom, StringComparison.CurrentCultureIgnoreCase) == 0)*/
+            var test = TableNom.Any(table => string.Compare(table.Nom, testPiece.Nom, StringComparison.CurrentCultureIgnoreCase) == 0);
+
+            return test ;
         }
 
         public bool NamePieceExist(Piece testPiece) //async Task<bool>
