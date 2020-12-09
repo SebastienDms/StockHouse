@@ -94,7 +94,7 @@ namespace StockHouse.Controllers
 
         [HttpGet]
         [Route("Produit/Supprimer-un-produit")]
-        public async Task<ActionResult> SupprimerUnProduit()
+        public ActionResult SupprimerUnProduit()
         {
             return View();
         }

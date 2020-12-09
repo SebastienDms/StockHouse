@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Infrastructure;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -48,20 +50,21 @@ namespace StockHouse.Controllers
             }
             else
             {
-                //if (_requetes.NameUserExist(newUser))
-                //{
-                //    ModelState.AddModelError("Nom", "Ce nom de pièce existe déjà!");
-                //    return View(newUser);
-                //}
-                //else
-                //{
-                    //User newUser = new User();
-                    //newUser.Nom = nom;
+                int test;
+                try
+                {
                     await _requetes.AddAsync(newUser);
                     var id = await _requetes.Save();
+                }
+                catch (DbUpdateException e)
+                when (e.InnerException?.InnerException is SqlException sqlEx &&
+                      (sqlEx.Number == 2601 || sqlEx.Number == 2627))
+                {
+                    ModelState.AddModelError("Nom", "Ce nom de pièce existe déjà!");
+                    return View(newUser);
+                }
 
-                    return RedirectToAction("Index", "User");
-                //}
+                return RedirectToAction("Index", "User");
             }
         }
 
@@ -95,7 +98,7 @@ namespace StockHouse.Controllers
 
         [HttpGet]
         [Route("User/Supprimer-un-user")]
-        public async Task<ActionResult> SupprimerUnUser()
+        public ActionResult SupprimerUnUser()
         {
             return View();
         }

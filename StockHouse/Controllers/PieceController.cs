@@ -47,8 +47,8 @@ namespace StockHouse.Controllers
             }
             else
             {
-                if (_requetes.NameExist<Piece>(newPiece).Result)
-                    //if (_requetes.NamePieceExist(newPiece))
+                /********* /!\ Utiliser await et non le .Result /!\ ************/
+                if (await _requetes.NameExist(newPiece))
                 {
                     ModelState.AddModelError("Nom", "Ce nom de pièce existe déjà!");
                     return View(newPiece);
@@ -95,7 +95,7 @@ namespace StockHouse.Controllers
 
         [HttpGet]
         [Route("Piece/Supprimer-une-piece")]
-        public async Task<ActionResult> SupprimerUnePiece()
+        public ActionResult SupprimerUnePiece()
         {
             return View();
         }

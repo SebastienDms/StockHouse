@@ -184,22 +184,18 @@ namespace StockHouse.Requetes
             return await Bdd.Users.AnyAsync(user => string.Compare(user.AdresseMail, email) == 0);
         }
         /* test nom existe générique -> IModelNom pour utiliser le champ Nom des tables */
-        public async Task<bool> NameExist<TNom>(Piece testPiece)
+        public async Task<bool> NameExist<TNom>(TNom testElement)
             /* Précise IModelNom pour accéder à la propriété Nom  */
             where TNom : class, IModelNom, new()
         {
-            DbSet<TNom> TableNom = Bdd.Set<TNom>();
+            DbSet<TNom> tableNom = Bdd.Set<TNom>();
 
-            /*await TableNom.AnyAsync<TNom>(table => string.Compare(table.Nom, testPiece.Nom, StringComparison.CurrentCultureIgnoreCase) == 0)*/
-            var test = TableNom.Any(table => string.Compare(table.Nom, testPiece.Nom, StringComparison.CurrentCultureIgnoreCase) == 0);
-
-            return test ;
+            return await tableNom.AnyAsync(table => string.Compare(table.Nom, testElement.Nom, StringComparison.CurrentCultureIgnoreCase) == 0);
         }
 
         public bool NamePieceExist(Piece testPiece) //async Task<bool>
         {
             bool exist = false;
-            //BdStockHouse bdStockHouse = new BdStockHouse();
 
             var list = Bdd.Pieces.Select(p => p.Nom).ToList();
 
@@ -213,7 +209,6 @@ namespace StockHouse.Requetes
             }
 
             return exist;
-            //return await Bdd.Pieces.AnyAsync(table => string.Compare(table.Nom, testPiece.Nom, StringComparison.CurrentCultureIgnoreCase) == 0);
         }
     }
 }

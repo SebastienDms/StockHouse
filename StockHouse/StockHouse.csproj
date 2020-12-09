@@ -146,6 +146,10 @@
     <Compile Include="Migrations\202012071621390_MAJ-1_add_required.designer.cs">
       <DependentUpon>202012071621390_MAJ-1_add_required.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202012091314081_Update-User.cs" />
+    <Compile Include="Migrations\202012091314081_Update-User.designer.cs">
+      <DependentUpon>202012091314081_Update-User.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BdStockHouse.cs" />
     <Compile Include="Models\tables\Achat.cs" />
@@ -348,6 +352,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202012071621390_MAJ-1_add_required.resx">
       <DependentUpon>202012071621390_MAJ-1_add_required.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202012091314081_Update-User.resx">
+      <DependentUpon>202012091314081_Update-User.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
