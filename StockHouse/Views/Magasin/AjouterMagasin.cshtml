@@ -9,16 +9,16 @@
 {
     <div class="form-group">
         <label>Nom:</label>
-        @Html.TextBoxFor(p => p.Nom, new { @value = Model.Nom })
+        @Html.TextBoxFor(p => p.Nom)
         @Html.ValidationMessageFor(p => p.Nom)
     </div>
     <div>
         <label>Adresse:</label>
-        @Html.TextBoxFor(p => p.Adresse, new { @value = Model.Adresse })
+        @Html.TextBoxFor(p => p.Adresse)
     </div>
     <div>
         <label>Ville:</label>
-        @Html.TextBoxFor(p => p.Ville, new { @value = Model.Ville })
+        @Html.TextBoxFor(p => p.Ville)
     </div>
     <button type="submit" class="btn btn-primary">Modifier</button>
 }
