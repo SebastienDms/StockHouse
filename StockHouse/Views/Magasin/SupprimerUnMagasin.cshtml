@@ -3,5 +3,13 @@
     ViewBag.Title = "SupprimerUnMagasin";
 }
 
-<h2>SupprimerUnMagasin</h2>
+<h2>Magasin à supprimer</h2>
 
+@using (Html.BeginForm("SupprimerMagasin", "Magasin", FormMethod.Post))
+{
+    <div class="form-group">
+        <label>Id:</label>
+        <input type="text" name="idSupprimer" id="idSupprimer" />
+    </div>
+    <button type="submit" class="btn btn-danger">Supprimer</button>
+}

@@ -12,6 +12,7 @@ namespace StockHouse.Controllers
     public class PieceController : Controller
     {
         private readonly Requete<Piece> _requetes = new Requete<Piece>();
+
         // GET: Piece
         [HttpGet]
         [Route("Piece/Index")]
@@ -55,8 +56,6 @@ namespace StockHouse.Controllers
                 }
                 else
                 {
-                    //Piece newPiece = new Piece();
-                    //newPiece.Nom = nom;
                     await _requetes.AddAsync(newPiece);
                     var id = await _requetes.Save();
 

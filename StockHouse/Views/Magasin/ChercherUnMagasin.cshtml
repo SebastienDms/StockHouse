@@ -1,7 +1,16 @@
-﻿
+﻿@model StockHouse.Models.Magasin
 @{
     ViewBag.Title = "ChercherUnMagasin";
 }
 
-<h2>ChercherUnMagasin</h2>
+<h2>Chercher un magasin</h2>
 
+@using (Html.BeginForm("ModifierUnMagasin", "Magasin", FormMethod.Post))
+{
+    <div class="form-group">
+        <label>Id:</label>
+        @Html.TextBoxFor(p => p.Id)
+        @Html.ValidationMessageFor(p => p.Id)
+    </div>
+    <button type="submit" class="btn btn-primary">Chercher</button>
+}

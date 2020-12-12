@@ -1,7 +1,29 @@
-﻿
+﻿@using StockHouse.Models
+@model List<Magasin>
 @{
     ViewBag.Title = "TousLesMagasins";
 }
 
-<h2>TousLesMagasins</h2>
+<h2>Tous les magasins</h2>
 
+<table class="table table-striped table-dark">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nom</th>
+            <th scope="col">Adresse</th>
+            <th scope="col">Ville</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Magasin magasin in @Model)
+         {
+            <tr>
+                <th scope="row">@magasin.Id</th>
+                <td>@magasin.Nom</td>
+                <td>@magasin.Adresse</td>
+                <td>@magasin.Ville</td>
+            </tr>
+         }
+    </tbody>
+</table>

@@ -14,6 +14,7 @@ namespace StockHouse.Controllers
         private readonly Requete<Magasin> _requetes = new Requete<Magasin>();
 
         // GET: Magasin
+        [HttpGet]
         [Route("Magasin/Index")]
         public ActionResult Index()
         {
@@ -47,20 +48,20 @@ namespace StockHouse.Controllers
             }
             else
             {
-                //if (_requetes.NameMagasinExist(newMagasin))
-                //{
-                //    ModelState.AddModelError("Nom", "Ce nom de pièce existe déjà!");
-                //    return View(newMagasin);
-                //}
-                //else
-                //{
-                    //Magasin newMagasin = new Magasin();
-                    //newMagasin.Nom = nom;
+                /********* /!\ Utiliser await et non le .Result /!\ ************/
+                if (await _requetes.NameExist(newMagasin))
+                {
+                    ModelState.AddModelError("Nom", "Ce nom de pièce existe déjà!");
+                    return View(newMagasin);
+                }
+                else
+                {
+
                     await _requetes.AddAsync(newMagasin);
                     var id = await _requetes.Save();
 
                     return RedirectToAction("Index", "Magasin");
-                //}
+                }
             }
         }
 
@@ -73,23 +74,47 @@ namespace StockHouse.Controllers
 
         [HttpPost]
         [Route("Magasin/Modifier-un-magasin")]
-        public async Task<ActionResult> ModifierUnMagasin(string idcherche)
+        public async Task<ActionResult> ModifierUnMagasin(Magasin wantedMagasin)
         {
-            int Id;
-            int.TryParse(idcherche, out Id);
+            if (wantedMagasin.Id == 0)
+            {
+                ModelState.AddModelError("Id", "Veuillez saisir un ID!");
+                return View("ChercherUnMagasin");
+            }
+            else
+            {
+                var searchMagasin = await _requetes.GetByIdAsync(wantedMagasin.Id);
 
-            var searchMagasin = await _requetes.GetByIdAsync(Id);
-
-            return View(searchMagasin);
+                if (searchMagasin == null)
+                {
+                    ModelState.AddModelError("Id", "Cet ID n'existe pas!");
+                    return View("ChercherUnMagasin");
+                }
+                return View(searchMagasin);
+            }
         }
 
         [HttpPost]
-        public async Task<ActionResult> ModifierMagasin(int idModif, string nomModif)
+        [Route("Magasin/Modifier-magasin")]
+        public async Task<ActionResult> ModifierMagasin(Magasin modifMagasin)
         {
-            Magasin modifMagasin = new Magasin { Id = idModif, Nom = nomModif };
-            await _requetes.UpdateMagasin(modifMagasin);
+            if (!ModelState.IsValid)
+            {
+                return View(modifMagasin);
+            }
+            else
+            {
 
-            return RedirectToAction("Index", "Magasin");
+                var resultat = await _requetes.UpdateAsync(modifMagasin);
+
+                if (resultat == 0)
+                {
+                    ModelState.AddModelError("Nom", "Ce nom est le nom actuel!");
+                    return View(modifMagasin);
+                }
+
+                return RedirectToAction("Index", "Magasin");
+            }
         }
 
         [HttpGet]
