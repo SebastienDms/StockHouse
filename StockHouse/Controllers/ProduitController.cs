@@ -14,12 +14,13 @@ namespace StockHouse.Controllers
         private readonly Requete<Produit> _requetes = new Requete<Produit>();
 
         // GET: Produit
+        [HttpGet]
         [Route("Produit/Index")]
-
         public ActionResult Index()
         {
             return View();
         }
+
         [HttpGet]
         [Route("Produit/Tous-les-produits")]
         public async Task<ActionResult> TousLesProduits()
@@ -31,7 +32,6 @@ namespace StockHouse.Controllers
 
         [HttpGet]
         [Route("Produit/Ajouter-produit")]
-        //[Route("Produit/Ajouter-un-produit")]
         public ActionResult AjouterProduit()
         {
             return View();
@@ -47,20 +47,19 @@ namespace StockHouse.Controllers
             }
             else
             {
-                //if (_requetes.NameProduitExist(newProduit))
-                //{
-                //    ModelState.AddModelError("Nom", "Ce nom de pièce existe déjà!");
-                //    return View(newProduit);
-                //}
-                //else
-                //{
-                    //Produit newProduit = new Produit();
-                    //newProduit.Nom = nom;
+                /********* /!\ Utiliser await et non le .Result /!\ ************/
+                if (await _requetes.NameExist(newProduit))
+                {
+                    ModelState.AddModelError("Nom", "Ce nom de produti existe déjà!");
+                    return View(newProduit);
+                }
+                else
+                {
                     await _requetes.AddAsync(newProduit);
                     var id = await _requetes.Save();
 
                     return RedirectToAction("Index", "Produit");
-                //}
+                }
             }
         }
 
@@ -73,23 +72,49 @@ namespace StockHouse.Controllers
 
         [HttpPost]
         [Route("Produit/Modifier-un-produit")]
-        public async Task<ActionResult> ModifierUnProduit(string idcherche)
+        public async Task<ActionResult> ModifierUnProduit(Produit wantedProduit)
         {
-            int Id;
-            int.TryParse(idcherche, out Id);
+            if (wantedProduit.Id == 0)
+            {
+                ModelState.AddModelError("Id", "Veuillez saisir un ID!");
+                return View("ModifierUnProduit");
+            }
+            else
+            {
+                var searchProduit = await _requetes.GetByIdAsync(wantedProduit.Id);
 
-            var searchProduit = await _requetes.GetByIdAsync(Id);
+                if (searchProduit == null)
+                {
+                    ModelState.AddModelError("Id", "Cet ID n'existe pas!");
+                    return View("ModifierUnProduit");
+                }
+                return View(searchProduit);
+            }
 
-            return View(searchProduit);
+
         }
 
         [HttpPost]
-        public async Task<ActionResult> ModifierProduit(int idModif, string nomModif)
+        [Route("Produit/Modifier-produit")]
+        public async Task<ActionResult> ModifierProduit(Produit modifProduit)
         {
-            Produit modifProduit = new Produit { Id = idModif, Nom = nomModif };
-            await _requetes.UpdateProduit(modifProduit);
+            if (!ModelState.IsValid)
+            {
+                return View(modifProduit);
+            }
+            else
+            {
 
-            return RedirectToAction("Index", "Produit");
+                var resultat = await _requetes.UpdateAsync(modifProduit);
+
+                if (resultat == 0)
+                {
+                    ModelState.AddModelError("Nom", "Ce nom est le nom actuel!");
+                    return View(modifProduit);
+                }
+
+                return RedirectToAction("Index", "Produit");
+            }
         }
 
         [HttpGet]

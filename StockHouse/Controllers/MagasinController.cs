@@ -32,7 +32,6 @@ namespace StockHouse.Controllers
 
         [HttpGet]
         [Route("Magasin/Ajouter-magasin")]
-        //[Route("Magasin/Ajouter-un-magasin")]
         public ActionResult AjouterMagasin()
         {
             return View();
@@ -51,12 +50,11 @@ namespace StockHouse.Controllers
                 /********* /!\ Utiliser await et non le .Result /!\ ************/
                 if (await _requetes.NameExist(newMagasin))
                 {
-                    ModelState.AddModelError("Nom", "Ce nom de pièce existe déjà!");
+                    ModelState.AddModelError("Nom", "Ce nom de magasin existe déjà!");
                     return View(newMagasin);
                 }
                 else
                 {
-
                     await _requetes.AddAsync(newMagasin);
                     var id = await _requetes.Save();
 

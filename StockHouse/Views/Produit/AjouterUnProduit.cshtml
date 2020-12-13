@@ -1,7 +1,32 @@
-﻿
+﻿@model StockHouse.Models.Produit
 @{
     ViewBag.Title = "AjouterUnProduit";
 }
 
-<h2>AjouterUnProduit</h2>
+<h2>Ajouter un produit</h2>
 
+@using (Html.BeginForm("AjouterUnProduit", "Produit", FormMethod.Post))
+{
+    <div class="form-group">
+        <label>Nom:</label>
+        @Html.TextBoxFor(p => p.Nom)
+        @Html.ValidationMessageFor(p => p.Nom)
+    </div>
+    <div>
+        <label>Adresse:</label>
+        @Html.TextBoxFor(p => p.Marque)
+    </div>
+    <div>
+        <label>Ville:</label>
+        @Html.TextBoxFor(p => p.Type)
+    </div>
+    <div>
+        <label>Ville:</label>
+        @Html.TextBoxFor(p => p.Stock)
+    </div>
+    <div>
+        <label>Ville:</label>
+        @Html.TextBoxFor(p => p.PieceId)
+    </div>
+    <button type="submit" class="btn btn-primary">Modifier</button>
+}

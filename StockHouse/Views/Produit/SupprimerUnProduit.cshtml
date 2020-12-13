@@ -5,3 +5,11 @@
 
 <h2>SupprimerUnProduit</h2>
 
+@using (Html.BeginForm("SupprimerProduit", "Produit", FormMethod.Post))
+{
+    <div class="form-group">
+        <label>Id:</label>
+        <input type="text" name="idSupprimer" id="idSupprimer" />
+    </div>
+    <button type="submit" class="btn btn-danger">Supprimer</button>
+}
