@@ -3,5 +3,13 @@
     ViewBag.Title = "SupprimerUnUser";
 }
 
-<h2>SupprimerUnUser</h2>
+<h2>Utilisateur à supprimer</h2>
 
+@using (Html.BeginForm("SupprimerUser", "User", FormMethod.Post))
+{
+    <div class="form-group">
+        <label>Id:</label>
+        <input type="text" name="idSupprimer" id="idSupprimer" />
+    </div>
+    <button type="submit" class="btn btn-danger">Supprimer</button>
+}

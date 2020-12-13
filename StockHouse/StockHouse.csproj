@@ -340,6 +340,7 @@
     <Content Include="Views\Piece\ModifierPiece.cshtml" />
     <Content Include="Views\Magasin\ModifierMagasin.cshtml" />
     <Content Include="Views\Produit\ModifierProduit.cshtml" />
+    <Content Include="Views\User\ModifierUser.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

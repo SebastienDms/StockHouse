@@ -1,10 +1,10 @@
 ﻿@model StockHouse.Models.User
 
 @{
-    ViewBag.Title = "ModifierUnUser";
+    ViewBag.Title = "ModifierUser";
 }
 
-<h2>ModifierUnUser</h2>
+<h2>Modifier un utilisateur</h2>
 
 @using (Html.BeginForm("ModifierUser", "User", FormMethod.Post))
 {
@@ -15,10 +15,12 @@
     <div class="form-group">
         <label>Nom:</label>
         @Html.TextBoxFor(p => p.Nom, new { @value = Model.Nom })
+        @Html.ValidationMessageFor(p => p.Nom)
     </div>
     <div>
         <label>Adresse:</label>
         @Html.TextBoxFor(p => p.AdresseMail, new { @value = Model.AdresseMail })
+        @Html.ValidationMessageFor(p => p.AdresseMail)
     </div>
     <div>
         <label>Ville:</label>

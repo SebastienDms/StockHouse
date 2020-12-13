@@ -16,15 +16,15 @@ namespace StockHouse.Controllers
         private readonly Requete<User> _requetes = new Requete<User>();
 
         // GET: User
+        [HttpGet]
         [Route("User/Index")]
-
         public ActionResult Index()
         {
             return View();
         }
 
         [HttpGet]
-        [Route("User/Tous-les-users")]
+        [Route("User/Tous-les-utilisateurs")]
         public async Task<ActionResult> TousLesUsers()
         {
             List<User> listUsers = (List<User>)await _requetes.GetAllAsync();
@@ -33,15 +33,14 @@ namespace StockHouse.Controllers
         }
 
         [HttpGet]
-        [Route("User/Ajouter-user")]
-        //[Route("User/Ajouter-un-user")]
+        [Route("User/Ajouter-utilisateur")]
         public ActionResult AjouterUser()
         {
             return View();
         }
 
         [HttpPost]
-        [Route("User/Ajouter-un-user")]
+        [Route("User/Ajouter-un-utilisateur")]
         public async Task<ActionResult> AjouterUnUser(User newUser)
         {
             if (!ModelState.IsValid)
@@ -59,7 +58,7 @@ namespace StockHouse.Controllers
                 when (e.InnerException?.InnerException is SqlException sqlEx &&
                       (sqlEx.Number == 2601 || sqlEx.Number == 2627))
                 {
-                    ModelState.AddModelError("Nom", "Ce nom de pièce existe déjà!");
+                    ModelState.AddModelError("AdresseMail", "Cette adresse e-mail existe déjà!");
                     return View(newUser);
                 }
 
@@ -68,35 +67,58 @@ namespace StockHouse.Controllers
         }
 
         [HttpGet]
-        [Route("User/Chercher-un-user")]
+        [Route("User/Chercher-un-utilisateur")]
         public ActionResult ChercherUnUser()
         {
             return View();
         }
 
         [HttpPost]
-        [Route("User/Modifier-un-user")]
-        public async Task<ActionResult> ModifierUnUser(string idcherche)
+        [Route("User/Modifier-un-utilisateur")]
+        public async Task<ActionResult> ModifierUnUser(User wantedUser)
         {
-            int Id;
-            int.TryParse(idcherche, out Id);
+            if (wantedUser.Id == 0)
+            {
+                ModelState.AddModelError("Id", "Veuillez saisir un ID!");
+                return View("ChercherUnUser");
+            }
+            else
+            {
+                var searchPiece = await _requetes.GetByIdAsync(wantedUser.Id);
 
-            var searchUser = await _requetes.GetByIdAsync(Id);
-
-            return View(searchUser);
+                if (searchPiece == null)
+                {
+                    ModelState.AddModelError("Id", "Cet ID n'existe pas!");
+                    return View("ChercherUnUser");
+                }
+                return View(searchPiece);
+            }
         }
 
         [HttpPost]
-        public async Task<ActionResult> ModifierUser(int idModif, string nomModif)
+        public async Task<ActionResult> ModifierUser(User modifUser)
         {
-            User modifUser = new User { Id = idModif, Nom = nomModif };
-            await _requetes.UpdateUser(modifUser);
+            if (!ModelState.IsValid)
+            {
+                return View(modifUser);
+            }
+            else
+            {
 
-            return RedirectToAction("Index", "User");
+                var resultat = await _requetes.UpdateAsync(modifUser);
+
+                if (resultat == 0)
+                {
+                    ModelState.AddModelError("Nom", "Ce nom est le nom actuel!");
+                    return View(modifUser);
+                }
+
+                return RedirectToAction("Index", "User");
+            }
         }
 
         [HttpGet]
-        [Route("User/Supprimer-un-user")]
+        [Route("User/Supprimer-un-utilisateur")]
         public ActionResult SupprimerUnUser()
         {
             return View();

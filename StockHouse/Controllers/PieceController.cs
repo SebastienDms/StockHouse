@@ -32,7 +32,6 @@ namespace StockHouse.Controllers
 
         [HttpGet]
         [Route("Piece/Ajouter-piece")]
-        //[Route("Piece/Ajouter-une-piece")]
         public ActionResult AjouterPiece()
         {
             return View();
