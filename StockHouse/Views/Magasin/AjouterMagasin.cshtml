@@ -10,7 +10,6 @@
     <div class="form-group">
         <label>Nom:</label>
         @Html.TextBoxFor(p => p.Nom)
-        @Html.ValidationMessageFor(p => p.Nom)
     </div>
     <div>
         <label>Adresse:</label>
@@ -20,5 +19,5 @@
         <label>Ville:</label>
         @Html.TextBoxFor(p => p.Ville)
     </div>
-    <button type="submit" class="btn btn-primary">Modifier</button>
+    <button type="submit" class="btn btn-primary">Ajouter</button>
 }

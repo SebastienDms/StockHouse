@@ -83,10 +83,14 @@ namespace StockHouse.Controllers
         [Route("Produit/Modifier-un-produit")]
         public async Task<ActionResult> ModifierUnProduit(Produit wantedProduit)
         {
+            var pieces = (List<Piece>)await _requetePiece.GetAllAsync();
+
+            ViewBag.PieceList = new SelectList(pieces, "Id", "Nom");
+
             if (wantedProduit.Id == 0)
             {
                 ModelState.AddModelError("Id", "Veuillez saisir un ID!");
-                return View("ModifierUnProduit");
+                return View(wantedProduit);
             }
             else
             {
@@ -95,7 +99,7 @@ namespace StockHouse.Controllers
                 if (searchProduit == null)
                 {
                     ModelState.AddModelError("Id", "Cet ID n'existe pas!");
-                    return View("ModifierUnProduit");
+                    return View("ChercherUnProduit");
                 }
                 return View(searchProduit);
             }
@@ -107,6 +111,10 @@ namespace StockHouse.Controllers
         [Route("Produit/Modifier-produit")]
         public async Task<ActionResult> ModifierProduit(Produit modifProduit)
         {
+            var pieces = (List<Piece>)await _requetePiece.GetAllAsync();
+
+            ViewBag.PieceList = new SelectList(pieces, "Id", "Nom");
+
             if (!ModelState.IsValid)
             {
                 return View(modifProduit);

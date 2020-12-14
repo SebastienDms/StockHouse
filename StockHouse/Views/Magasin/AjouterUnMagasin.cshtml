@@ -15,10 +15,12 @@
     <div>
         <label>Adresse:</label>
         @Html.TextBoxFor(p => p.Adresse, new { @value = Model.Adresse })
+        @Html.ValidationMessageFor(p => p.Adresse)
     </div>
     <div>
-        <label>Vile:</label>
+        <label>Ville:</label>
         @Html.TextBoxFor(p => p.Ville, new { @value = Model.Ville })
+        @Html.ValidationMessageFor(p => p.Ville)
     </div>
-    <button type="submit" class="btn btn-primary">Modifier</button>
+    <button type="submit" class="btn btn-primary">Ajouter</button>
 }

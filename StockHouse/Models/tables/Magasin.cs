@@ -7,7 +7,7 @@ namespace StockHouse.Models
     public class Magasin : IModelNom
     {
         public int Id { get; set; }
-        [Required(ErrorMessage = "Vous devez saisir votre nom.")]
+        [Required(ErrorMessage = "Vous devez saisir un nom.")]
         public string Nom { get; set; }
         [Required(ErrorMessage = "Vous devez saisir l'adresse du magasin.")]
         public string Adresse { get; set; }
