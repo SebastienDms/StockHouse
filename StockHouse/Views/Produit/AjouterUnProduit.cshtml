@@ -13,20 +13,20 @@
         @Html.ValidationMessageFor(p => p.Nom)
     </div>
     <div>
-        <label>Adresse:</label>
+        <label>Marque:</label>
         @Html.TextBoxFor(p => p.Marque)
     </div>
     <div>
-        <label>Ville:</label>
+        <label>Type:</label>
         @Html.TextBoxFor(p => p.Type)
     </div>
     <div>
-        <label>Ville:</label>
+        <label>Stock:</label>
         @Html.TextBoxFor(p => p.Stock)
     </div>
     <div>
-        <label>Ville:</label>
-        @Html.TextBoxFor(p => p.PieceId)
+        <label>Pièce:</label>
+        @Html.DropDownListFor(p => p.PieceId, ViewBag.PieceList as SelectList, "--Select piece--")
     </div>
     <button type="submit" class="btn btn-primary">Modifier</button>
 }

@@ -15,7 +15,7 @@ namespace StockHouse.Models
         public string Type { get; set; }
         public string Marque { get; set; }
         [ForeignKey("Piece")]
-        [Required(ErrorMessage = "Vous devez saisir une pièce de la maison.")]
+        [Required(ErrorMessage = "Vous devez choisir une pièce de la maison.")]
         public int PieceId { get; set; }
         public Piece Piece { get; set; }
 

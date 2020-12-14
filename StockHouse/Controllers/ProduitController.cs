@@ -12,6 +12,7 @@ namespace StockHouse.Controllers
     public class ProduitController : Controller
     {
         private readonly Requete<Produit> _requetes = new Requete<Produit>();
+        private readonly Requete<Piece> _requetePiece = new Requete<Piece>();
 
         // GET: Produit
         [HttpGet]
@@ -32,8 +33,12 @@ namespace StockHouse.Controllers
 
         [HttpGet]
         [Route("Produit/Ajouter-produit")]
-        public ActionResult AjouterProduit()
+        public async Task<ActionResult> AjouterProduit()
         {
+            var pieces = (List<Piece>)await _requetePiece.GetAllAsync();
+
+            ViewBag.PieceList = new SelectList(pieces,"Id","Nom");
+
             return View();
         }
 
@@ -41,6 +46,10 @@ namespace StockHouse.Controllers
         [Route("Produit/Ajouter-un-produit")]
         public async Task<ActionResult> AjouterUnProduit(Produit newProduit)
         {
+            var pieces = (List<Piece>)await _requetePiece.GetAllAsync();
+
+            ViewBag.PieceList = new SelectList(pieces, "Id", "Nom");
+
             if (!ModelState.IsValid)
             {
                 return View(newProduit);

@@ -1,7 +1,44 @@
-﻿
+﻿@model StockHouse.Models.Achat
+
 @{
     ViewBag.Title = "ModifierUnAchat";
 }
 
 <h2>ModifierUnAchat</h2>
 
+@using (Html.BeginForm("ModifierAchat", "Achat", FormMethod.Post))
+{
+    <div class="form-group">
+        <label>ID:</label>
+        @Html.TextBoxFor(p => p.Id, new { @value = Model.Id, @readonly = "true" })
+    </div>
+    <div class="form-group">
+        <label>Nom:</label>
+        @Html.TextBoxFor(p => p.Prix)
+    </div>
+    <div class="form-group">
+        <label>Nom:</label>
+        @Html.TextBoxFor(p => p.Quantité)
+    </div>
+    <div class="form-group">
+        <label>Nom:</label>
+        @Html.TextBoxFor(p => p.DateAchat)
+    </div>
+    <div class="form-group">
+        <label>Nom:</label>
+        @Html.TextBoxFor(p => p.UserId)
+        @*@Html.ValidationMessageFor(p => p.Nom)*@
+    </div>
+    <div class="form-group">
+        <label>Nom:</label>
+        @Html.TextBoxFor(p => p.MagasinId)
+        @*@Html.ValidationMessageFor(p => p.Nom)*@
+    </div>
+    <div class="form-group">
+        <label>Nom:</label>
+        @Html.TextBoxFor(p => p.ProduitId)
+        @*@Html.ValidationMessageFor(p => p.Nom)*@
+    </div>
+
+    <button type="submit" class="btn btn-primary">Ajouter</button>
+}

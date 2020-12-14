@@ -3,5 +3,13 @@
     ViewBag.Title = "SupprimerUnAchat";
 }
 
-<h2>SupprimerUnAchat</h2>
+<h2>Achat à supprimer</h2>
 
+@using (Html.BeginForm("SupprimerAchat", "Achat", FormMethod.Post))
+{
+    <div class="form-group">
+        <label>Id:</label>
+        <input type="text" name="idSupprimer" id="idSupprimer" />
+    </div>
+    <button type="submit" class="btn btn-danger">Supprimer</button>
+}

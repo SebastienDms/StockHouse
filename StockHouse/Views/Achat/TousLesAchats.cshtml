@@ -1,7 +1,36 @@
-﻿
+﻿@using StockHouse.Models
+@model List<Achat>
+
 @{
     ViewBag.Title = "TousLesAchats";
 }
 
-<h2>TousLesAchats</h2>
+<h2>Tous les achats</h2>
 
+<table class="table table-striped table-dark">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Prix</th>
+            <th scope="col">Quantité</th>
+            <th scope="col">Date d'achat</th>
+            <th scope="col">ID user</th>
+            <th scope="col">ID magasin</th>
+            <th scope="col">ID produit</th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (Achat achat in @Model)
+    {
+        <tr>
+            <th scope="row">@achat.Id</th>
+            <td>@achat.Prix</td>
+            <td>@achat.Quantité</td>
+            <td>@achat.DateAchat</td>
+            <td>@achat.UserId</td>
+            <td>@achat.MagasinId</td>
+            <td>@achat.ProduitId</td>
+        </tr>
+    }
+    </tbody>
+</table>

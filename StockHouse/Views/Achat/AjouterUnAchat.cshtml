@@ -1,7 +1,39 @@
-﻿
+﻿@model StockHouse.Models.Achat
+
 @{
     ViewBag.Title = "AjouterUnAchat";
 }
 
 <h2>AjouterUnAchat</h2>
 
+@using (Html.BeginForm("AjouterUnAchat", "Achat", FormMethod.Post))
+ {
+    <div class="form-group">
+        <label>Prix:</label>
+        @Html.TextBoxFor(p => p.Prix)
+    </div>
+    <div class="form-group">
+        <label>Quantité:</label>
+        @Html.TextBoxFor(p => p.Quantité)
+    </div>
+    <div class="form-group">
+        <label>Date d'achat:</label>
+        @Html.TextBoxFor(p => p.DateAchat)
+    </div>
+    <div class="form-group">
+        <label>ID user:</label>
+        @Html.TextBoxFor(p => p.UserId)
+        @*@Html.ValidationMessageFor(p => p.Nom)*@
+    </div>
+    <div class="form-group">
+        <label>ID magasin:</label>
+        @Html.TextBoxFor(p => p.MagasinId)
+        @*@Html.ValidationMessageFor(p => p.Nom)*@
+    </div>
+    <div class="form-group">
+        <label>ID produit:</label>
+        @Html.TextBoxFor(p => p.ProduitId)
+        @*@Html.ValidationMessageFor(p => p.Nom)*@
+    </div>
+    <button type="submit" class="btn btn-primary">Ajouter</button>
+ }

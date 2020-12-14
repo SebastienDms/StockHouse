@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -14,6 +13,7 @@ namespace StockHouse.Controllers
     {
         private readonly Requete<Achat> _requetes = new Requete<Achat>();
 
+        // GET: Achat
         [HttpGet]
         [Route("Achat/Index")]
         public ActionResult Index()
@@ -32,7 +32,6 @@ namespace StockHouse.Controllers
 
         [HttpGet]
         [Route("Achat/Ajouter-achat")]
-        //[Route("Achat/Ajouter-une-achat")]
         public ActionResult AjouterAchat()
         {
             return View();
@@ -48,20 +47,10 @@ namespace StockHouse.Controllers
             }
             else
             {
-                //if (_requetes.NameAchatExist(newAchat))
-                //{
-                //    ModelState.AddModelError("Nom", "Ce nom de pièce existe déjà!");
-                //    return View(newAchat);
-                //}
-                //else
-                //{
-                    //Achat newAchat = new Achat();
-                    //newAchat.Nom = nom;
-                    await _requetes.AddAsync(newAchat);
-                    var id = await _requetes.Save();
+                await _requetes.AddAsync(newAchat);
+                var id = await _requetes.Save();
 
-                    return RedirectToAction("Index", "Achat");
-                //}
+                return RedirectToAction("Index", "Achat");
             }
         }
 
@@ -74,24 +63,47 @@ namespace StockHouse.Controllers
 
         [HttpPost]
         [Route("Achat/Modifier-un-achat")]
-        public async Task<ActionResult> ModifierUnAchat(string idcherche)
+        public async Task<ActionResult> ModifierUnAchat(Achat wantedAchat)
         {
-            int Id;
-            int.TryParse(idcherche, out Id);
+            if (wantedAchat.Id == 0)
+            {
+                ModelState.AddModelError("Id", "Veuillez saisir un ID!");
+                return View("ChercherUnAchat");
+            }
+            else
+            {
+                var searchPiece = await _requetes.GetByIdAsync(wantedAchat.Id);
 
-            var searchAchat = await _requetes.GetByIdAsync(Id);
-
-            return View(searchAchat);
+                if (searchPiece == null)
+                {
+                    ModelState.AddModelError("Id", "Cet ID n'existe pas!");
+                    return View("ChercherUnAchat");
+                }
+                return View(searchPiece);
+            }
         }
 
         [HttpPost]
-        public async Task<ActionResult> ModifierAchat(int idModif, string prixModif)
+        public async Task<ActionResult> ModifierAchat(Achat modifAchat)
         {
-            int.TryParse(prixModif, NumberStyles.AllowDecimalPoint, new CultureInfo("fr-BE"), out int prixResult);
-            Achat modifAchat = new Achat { Id = idModif, Prix = prixResult };
-            await _requetes.UpdateAchat(modifAchat);
+            if (!ModelState.IsValid)
+            {
+                return View(modifAchat);
+            }
+            else
+            {
 
-            return RedirectToAction("Index", "Achat");
+                var resultat = await _requetes.UpdateAsync(modifAchat);
+
+                if (resultat == 0)
+                {
+                    ModelState.AddModelError("Nom", "Ce nom est le nom actuel!");
+                    return View(modifAchat);
+                }
+
+                return RedirectToAction("Index", "Achat");
+            }
+            //int.TryParse(prixModif, NumberStyles.AllowDecimalPoint, new CultureInfo("fr-BE"), out int prixResult);
         }
 
         [HttpGet]
