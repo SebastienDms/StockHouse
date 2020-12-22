@@ -11,6 +11,7 @@ namespace StockHouse.Controllers
         public ActionResult Index()
         {
             return View();
+            //return RedirectToAction("RegisterPage","User");
         }
 
         public ActionResult About()

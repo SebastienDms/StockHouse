@@ -20,7 +20,7 @@ namespace StockHouse.Models
         [Index(IsUnique = true)]
         public string AdresseMail { get; set; }
         [Required(ErrorMessage = "Vous devez saisir un mot de passe.")]
-        [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$",
+        [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&=])[A-Za-z\d@$!%*?&=]{8,}$",
             ErrorMessage = "Le mot de passe doit être de minimum 8 caractères et contenir au moins une majuscule, un chiffre et un caractère spécial.")]
         public string MotDePasse { get; set; }
 

@@ -37,6 +37,7 @@ namespace StockHouse.Controllers
             return View();
         }
 
+        [Authorize()]
         [HttpPost]
         [Route("Magasin/Ajouter-un-magasin")]
         public async Task<ActionResult> AjouterUnMagasin(Magasin newMagasin)

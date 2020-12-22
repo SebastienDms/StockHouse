@@ -135,6 +135,7 @@
     <Compile Include="Controllers\PieceController.cs" />
     <Compile Include="Controllers\ProduitController.cs" />
     <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Cryptage.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -342,6 +343,8 @@
     <Content Include="Views\Produit\ModifierProduit.cshtml" />
     <Content Include="Views\User\ModifierUser.cshtml" />
     <Content Include="Views\Achat\ModifierAchat.cshtml" />
+    <Content Include="Views\User\RegisterPage.cshtml" />
+    <Content Include="Views\User\RegisterUser.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

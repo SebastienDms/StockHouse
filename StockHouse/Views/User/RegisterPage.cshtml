@@ -1,0 +1,29 @@
+﻿@model StockHouse.Models.User
+
+@{
+    ViewBag.Title = "RegisterPage";
+}
+
+<h2>Créer un compte</h2>
+
+@using (Html.BeginForm("RegisterUser", "User", FormMethod.Post))
+{
+    <div class="form-group">
+        <label>Nom:</label>
+        @Html.TextBoxFor(p => p.Nom)
+    </div>
+    <div>
+        <label>E-mail:</label>
+        @Html.TextBoxFor(p => p.AdresseMail)
+    </div>
+    <div>
+        <label>Mot de passe:</label>
+        @Html.TextBoxFor(p => p.MotDePasse)
+    </div>
+    <div>
+        @*<label>Ville:</label>
+        @Html.TextBoxFor(p => p.Role)*@
+        @Html.HiddenFor(p=>p.Role, new {@value="Membre"})
+    </div>
+    <button type="submit" class="btn btn-primary">Créer</button>
+}

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.Entity.Infrastructure;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -14,6 +15,7 @@ namespace StockHouse.Controllers
     public class UserController : Controller
     {
         private readonly Requete<User> _requetes = new Requete<User>();
+        //private readonly Cryptage _cryptage = new Cryptage();
 
         // GET: User
         [HttpGet]
@@ -65,7 +67,42 @@ namespace StockHouse.Controllers
                 return RedirectToAction("Index", "User");
             }
         }
+        [HttpGet]
+        [Route("Register-page")]
+        public ActionResult RegisterPage()
+        {
+            return View();
+        }
+        [HttpPost]
+        [Route("Register")]
+        public async Task<ActionResult> RegisterUser(User registerUser)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(registerUser);
+            }
+            else
+            {
+                try
+                {
+                    /* Membre ou modérateur ou admin */
+                    /* Par défaut Membre */
+                    registerUser.Role = "Membre";
+                    /* cryptage du mot de passe */
+                    registerUser.MotDePasse = Cryptage.EncryptStringToBytes_Aes(registerUser.MotDePasse);
+                    await _requetes.AddAsync(registerUser);
+                }
+                catch (DbUpdateException e)
+                    when (e.InnerException?.InnerException is SqlException sqlEx &&
+                          (sqlEx.Number == 2601 || sqlEx.Number == 2627))
+                {
+                    ModelState.AddModelError("AdresseMail", "Cette adresse e-mail existe déjà!");
+                    return View(registerUser);
+                }
 
+                return RedirectToAction("Index", "User");
+            }
+        }
         [HttpGet]
         [Route("User/Chercher-un-utilisateur")]
         public ActionResult ChercherUnUser()
@@ -131,6 +168,5 @@ namespace StockHouse.Controllers
 
             return RedirectToAction("Index", "User");
         }
-
     }
 }

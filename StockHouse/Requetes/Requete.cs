@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -81,7 +82,15 @@ namespace StockHouse.Requetes
 				throw new ArgumentNullException(nameof(model));
 
 			Table.Add(model);
-			Bdd.SaveChanges();
+            try
+            {
+                Bdd.SaveChanges();
+            }
+            catch (DbEntityValidationException e)
+            {
+                Console.WriteLine(e.EntityValidationErrors);
+                throw;
+            }
 
 			return model.Id;
 		}
