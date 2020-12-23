@@ -7,13 +7,13 @@ namespace StockHouse.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.4.4")]
-    public sealed partial class CreateDB : IMigrationMetadata
+    public sealed partial class NewDBStockHouseAuth : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(CreateDB));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(NewDBStockHouseAuth));
         
         string IMigrationMetadata.Id
         {
-            get { return "202011272036208_CreateDB"; }
+            get { return "202012222317437_NewDBStockHouseAuth"; }
         }
         
         string IMigrationMetadata.Source

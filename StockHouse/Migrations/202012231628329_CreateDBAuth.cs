@@ -3,7 +3,7 @@
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class CreateDB : DbMigration
+    public partial class CreateDBAuth : DbMigration
     {
         public override void Up()
         {
@@ -32,9 +32,9 @@
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        Nom = c.String(),
-                        Adresse = c.String(),
-                        Ville = c.String(),
+                        Nom = c.String(nullable: false),
+                        Adresse = c.String(nullable: false),
+                        Ville = c.String(nullable: false),
                     })
                 .PrimaryKey(t => t.Id);
             
@@ -43,7 +43,7 @@
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        Nom = c.String(),
+                        Nom = c.String(nullable: false),
                         Stock = c.Int(nullable: false),
                         Type = c.String(),
                         Marque = c.String(),
@@ -58,7 +58,7 @@
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        Nom = c.String(),
+                        Nom = c.String(nullable: false),
                     })
                 .PrimaryKey(t => t.Id);
             
@@ -67,10 +67,13 @@
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        Nom = c.String(),
+                        Nom = c.String(nullable: false),
                         Role = c.String(),
+                        AdresseMail = c.String(nullable: false, maxLength: 80, unicode: false),
+                        MotDePasse = c.String(nullable: false),
                     })
-                .PrimaryKey(t => t.Id);
+                .PrimaryKey(t => t.Id)
+                .Index(t => t.AdresseMail, unique: true);
             
         }
         
@@ -80,6 +83,7 @@
             DropForeignKey("dbo.Achats", "ProduitId", "dbo.Produits");
             DropForeignKey("dbo.Produits", "PieceId", "dbo.Pieces");
             DropForeignKey("dbo.Achats", "MagasinId", "dbo.Magasins");
+            DropIndex("dbo.Users", new[] { "AdresseMail" });
             DropIndex("dbo.Produits", new[] { "PieceId" });
             DropIndex("dbo.Achats", new[] { "ProduitId" });
             DropIndex("dbo.Achats", new[] { "MagasinId" });

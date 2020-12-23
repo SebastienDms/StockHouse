@@ -7,13 +7,13 @@ namespace StockHouse.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.4.4")]
-    public sealed partial class MAJ1_add_required : IMigrationMetadata
+    public sealed partial class CreateDBAuth : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(MAJ1_add_required));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(CreateDBAuth));
         
         string IMigrationMetadata.Id
         {
-            get { return "202012071621390_MAJ-1_add_required"; }
+            get { return "202012231628329_CreateDBAuth"; }
         }
         
         string IMigrationMetadata.Source

@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using System.Data.Entity.Validation;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -53,12 +55,22 @@ namespace StockHouse.Requetes
 		{
 			return await Table.FindAsync(id);
 		}
+        /**
+         * <summary>Récupère un enregistrement via son id</summary>
+         * <param name="id">Id de l'élément à récupérer</param>
+         * <returns>Retourne l'enregistrement trouvé</returns>
+         */
+        public virtual async Task<User> GetUserByMailAsync(string mail)
+        {
+            var user = await Bdd.Users.Where(u=> u.AdresseMail == mail).FirstOrDefaultAsync();
+            return user;
+        }
 
-		/**
+        /**
 		 * <summary>Récupère tous les enregistrements de la table</summary>
 		 * <returns>Retourne une liste des modèles</returns>
 		 */
-		public virtual IList<T> GetAll()
+        public virtual IList<T> GetAll()
 		{
 			return Table.ToList();
 		}
@@ -76,7 +88,7 @@ namespace StockHouse.Requetes
 		 * <summary>Ajoute un enregistrement</summary>
 		 * <param name="model">Modèle à sauvegarder</param>
 		 */
-		public virtual int Add(T model)
+		public virtual bool Add(T model)
 		{
 			if (model == null)
 				throw new ArgumentNullException(nameof(model));
@@ -84,22 +96,30 @@ namespace StockHouse.Requetes
 			Table.Add(model);
             try
             {
-                Bdd.SaveChanges();
+                var res = Bdd.SaveChanges();
             }
-            catch (DbEntityValidationException e)
+            catch (DbUpdateException e)
             {
-                Console.WriteLine(e.EntityValidationErrors);
+                Console.WriteLine(e);
+
+                //var test = ((SqlException) e.InnerException.InnerException).Number;
+                if (((SqlException)e.InnerException.InnerException).Number == 2601)
+                /* Capte l'exception qui signale la violation d'unicité sur l'e-mail */
+                {
+                    return false;
+                }
+
                 throw;
             }
 
-			return model.Id;
+            return true;
 		}
 
 		/**
 		 * <summary>Ajoute un enregistrement</summary>
 		 * <param name="model">Modèle à sauvegarder</param>
 		 */
-		public virtual async Task<int> AddAsync(T model)
+		public virtual async Task<bool> AddAsync(T model)
 		{
 			return await Task.Run(() => Add(model));
 		}
@@ -143,59 +163,67 @@ namespace StockHouse.Requetes
 
             return await Bdd.SaveChangesAsync();
         }
-        public async Task<int> UpdatePiece(Piece modifPiece)
-        {
-            var updatePiece = await (from p in Bdd.Pieces
-                where p.Id == modifPiece.Id
-                select p).FirstOrDefaultAsync();
+        #region update
+        //public async Task<int> UpdatePiece(Piece modifPiece)
+        //{
+        //    var updatePiece = await (from p in Bdd.Pieces
+        //        where p.Id == modifPiece.Id
+        //        select p).FirstOrDefaultAsync();
 
-            updatePiece.Nom = modifPiece.Nom;
+        //    updatePiece.Nom = modifPiece.Nom;
 
-            return await Bdd.SaveChangesAsync();
-        }
-        public async Task<int> UpdateAchat(Achat modifAchat)
-        {
-            var updateAchat = await (from p in Bdd.Achats
-                where p.Id == modifAchat.Id
-                select p).FirstOrDefaultAsync();
+        //    return await Bdd.SaveChangesAsync();
+        //}
+        //public async Task<int> UpdateAchat(Achat modifAchat)
+        //{
+        //    var updateAchat = await (from p in Bdd.Achats
+        //        where p.Id == modifAchat.Id
+        //        select p).FirstOrDefaultAsync();
 
-            updateAchat.Prix = modifAchat.Prix;
+        //    updateAchat.Prix = modifAchat.Prix;
 
-            return await Bdd.SaveChangesAsync();
-        }
-        public async Task<int> UpdateMagasin(Magasin modifMagasin)
-        {
-            var updateMagasin = await (from p in Bdd.Magasins
-                where p.Id == modifMagasin.Id
-                select p).FirstOrDefaultAsync();
+        //    return await Bdd.SaveChangesAsync();
+        //}
+        //public async Task<int> UpdateMagasin(Magasin modifMagasin)
+        //{
+        //    var updateMagasin = await (from p in Bdd.Magasins
+        //        where p.Id == modifMagasin.Id
+        //        select p).FirstOrDefaultAsync();
 
-            updateMagasin.Nom = modifMagasin.Nom;
+        //    updateMagasin.Nom = modifMagasin.Nom;
 
-            return await Bdd.SaveChangesAsync();
-        }
-        public async Task<int> UpdateProduit(Produit modifProduit)
-        {
-            var updateProduit = await (from p in Bdd.Produits
-                where p.Id == modifProduit.Id
-                select p).FirstOrDefaultAsync();
+        //    return await Bdd.SaveChangesAsync();
+        //}
+        //public async Task<int> UpdateProduit(Produit modifProduit)
+        //{
+        //    var updateProduit = await (from p in Bdd.Produits
+        //        where p.Id == modifProduit.Id
+        //        select p).FirstOrDefaultAsync();
 
-            updateProduit.Nom = modifProduit.Nom;
+        //    updateProduit.Nom = modifProduit.Nom;
 
-            return await Bdd.SaveChangesAsync();
-        }
-        public async Task<int> UpdateUser(User modifUser)
-        {
-            var updateProduit = await (from p in Bdd.Users
-                where p.Id == modifUser.Id
-                select p).FirstOrDefaultAsync();
+        //    return await Bdd.SaveChangesAsync();
+        //}
+        //public async Task<int> UpdateUser(User modifUser)
+        //{
+        //    var updateProduit = await (from p in Bdd.Users
+        //        where p.Id == modifUser.Id
+        //        select p).FirstOrDefaultAsync();
 
-            updateProduit.Nom = modifUser.Nom;
+        //    updateProduit.Nom = modifUser.Nom;
 
-            return await Bdd.SaveChangesAsync();
-        }
-
+        //    return await Bdd.SaveChangesAsync();
+        //}
+        #endregion
         /*********************************************************/
         /* EXIST */
+        public async Task<bool> VerifLogin(User logUser)
+        {
+            logUser.MotDePasse = Cryptage.EncryptStringToBytes_Aes(logUser.MotDePasse);
+            
+            return await Bdd.Users.AnyAsync(u =>
+                u.AdresseMail == logUser.AdresseMail && u.MotDePasse == logUser.MotDePasse);
+        }
         public async Task<bool> MailExist(string email)
         {
             return await Bdd.Users.AnyAsync(user => string.Compare(user.AdresseMail, email) == 0);
@@ -208,24 +236,6 @@ namespace StockHouse.Requetes
             DbSet<TNom> tableNom = Bdd.Set<TNom>();
 
             return await tableNom.AnyAsync(table => string.Compare(table.Nom, testElement.Nom, StringComparison.CurrentCultureIgnoreCase) == 0);
-        }
-
-        public bool NamePieceExist(Piece testPiece) //async Task<bool>
-        {
-            bool exist = false;
-
-            var list = Bdd.Pieces.Select(p => p.Nom).ToList();
-
-            foreach (var element in list)
-            {
-                if (element == testPiece.Nom)
-                {
-                    exist = true;
-                    break;
-                }
-            }
-
-            return exist;
         }
     }
 }
