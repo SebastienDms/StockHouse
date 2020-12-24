@@ -65,7 +65,6 @@ namespace StockHouse.Controllers
                 else
                 {
                     await _requetes.AddAsync(newProduit);
-                    var id = await _requetes.Save();
 
                     return RedirectToAction("Index", "Produit");
                 }

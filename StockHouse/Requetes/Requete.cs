@@ -84,11 +84,11 @@ namespace StockHouse.Requetes
 			return await Table.ToListAsync();
 		}
 
-		/**
+        /**
 		 * <summary>Ajoute un enregistrement</summary>
 		 * <param name="model">Modèle à sauvegarder</param>
 		 */
-		public virtual bool Add(T model)
+        public virtual bool Add(T model)
 		{
 			if (model == null)
 				throw new ArgumentNullException(nameof(model));
