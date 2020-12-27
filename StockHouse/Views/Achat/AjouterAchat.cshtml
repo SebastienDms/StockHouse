@@ -22,15 +22,18 @@
     </div>
     <div class="form-group">
         <label>ID user:</label>
-        @Html.TextBoxFor(p => p.UserId)
+        @Html.DropDownListFor(p => p.UserId, ViewBag.UserList as SelectList, "--Select user--")
+
     </div>
     <div class="form-group">
         <label>ID magasin:</label>
-        @Html.TextBoxFor(p => p.MagasinId)
+        @Html.DropDownListFor(p => p.MagasinId, ViewBag.MagasinList as SelectList, "--Select shop--")
+
     </div>
     <div class="form-group">
         <label>ID produit:</label>
-        @Html.TextBoxFor(p => p.ProduitId)
+        @Html.DropDownListFor(p => p.ProduitId, ViewBag.ProduitsList as SelectList, "--Select product--")
+
     </div>
 
     <button type="submit" class="btn btn-primary">Ajouter</button>

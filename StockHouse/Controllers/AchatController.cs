@@ -11,7 +11,13 @@ namespace StockHouse.Controllers
 {
     public class AchatController : Controller
     {
-        private readonly Requete<Achat> _requetes = new Requete<Achat>();
+        private BdStockHouse db = new BdStockHouse();
+
+        private readonly Requete<Achat> _requetesA = new Requete<Achat>();
+        private readonly Requete<Produit> _requetesP = new Requete<Produit>();
+        private readonly Requete<Magasin> _requetesM = new Requete<Magasin>();
+        private readonly Requete<User> _requetesU = new Requete<User>();
+
 
         // GET: Achat
         [HttpGet]
@@ -25,7 +31,7 @@ namespace StockHouse.Controllers
         [Route("Achat/Tous-les-achats")]
         public async Task<ActionResult> TousLesAchats()
         {
-            List<Achat> listAchats = (List<Achat>)await _requetes.GetAllAsync();
+            List<Achat> listAchats = (List<Achat>)await _requetesA.GetAllAsync();
 
             return View(listAchats);
         }
@@ -34,6 +40,10 @@ namespace StockHouse.Controllers
         [Route("Achat/Ajouter-achat")]
         public ActionResult AjouterAchat()
         {
+            ViewBag.ProduitsList = new SelectList(db.Produits, "Id", "Nom");
+            ViewBag.MagasinList = new SelectList(db.Magasins, "Id", "Nom");
+            ViewBag.UserList = new SelectList(db.Users, "Id", "Nom");
+
             return View();
         }
 
@@ -47,8 +57,8 @@ namespace StockHouse.Controllers
             }
             else
             {
-                await _requetes.AddAsync(newAchat);
-                var id = await _requetes.Save();
+                await _requetesA.AddAsync(newAchat);
+                //var id = await _requetesA.Save();
 
                 return RedirectToAction("Index", "Achat");
             }
@@ -72,7 +82,7 @@ namespace StockHouse.Controllers
             }
             else
             {
-                var searchPiece = await _requetes.GetByIdAsync(wantedAchat.Id);
+                var searchPiece = await _requetesA.GetByIdAsync(wantedAchat.Id);
 
                 if (searchPiece == null)
                 {
@@ -93,7 +103,7 @@ namespace StockHouse.Controllers
             else
             {
 
-                var resultat = await _requetes.UpdateAsync(modifAchat);
+                var resultat = await _requetesA.UpdateAsync(modifAchat);
 
                 if (resultat == 0)
                 {
@@ -116,7 +126,7 @@ namespace StockHouse.Controllers
         [HttpPost]
         public async Task<ActionResult> SupprimerAchat(int idSupprimer)
         {
-            await _requetes.DeleteAsync(idSupprimer);
+            await _requetesA.DeleteAsync(idSupprimer);
 
             return RedirectToAction("Index", "Achat");
         }
