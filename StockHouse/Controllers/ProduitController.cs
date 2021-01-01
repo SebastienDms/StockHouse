@@ -167,12 +167,14 @@ namespace StockHouse.Controllers
                                     pro => pro.PieceId,
                                     pie => pie.Id,
                                     (pro, pie) => new { ProduitNom = pro.Nom, PieceNom = pie.Nom}).ToList();
-                //.Where(produit=>produit.PieceId==idPiece.PieceId).ToList();
+
             List<Tuple<string, string>> list = new List<Tuple<string, string>>();
+            
             foreach (var element in res)
             {
                 list.Add(new Tuple<string, string>(element.ProduitNom,element.PieceNom));
             }
+            
             ViewBag.ResList = list;
 
             return View();
