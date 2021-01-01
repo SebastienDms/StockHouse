@@ -1,0 +1,11 @@
+﻿
+@{
+    ViewBag.Title = "ProduitParPiece";
+}
+
+<h2>ProduitParPiece</h2>
+
+@foreach (Tuple<string, string> obj in ViewBag.ResList)
+{
+    <p>@obj.Item1 dans @obj.Item2</p>
+}

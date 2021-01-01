@@ -11,6 +11,7 @@ namespace StockHouse.Controllers
 {
     public class ProduitController : Controller
     {
+        protected readonly BdStockHouse Bdd = new BdStockHouse();
         private readonly Requete<Produit> _requetes = new Requete<Produit>();
         private readonly Requete<Piece> _requetePiece = new Requete<Piece>();
 
@@ -146,6 +147,37 @@ namespace StockHouse.Controllers
             await _requetes.DeleteAsync(idSupprimer);
 
             return RedirectToAction("Index", "Produit");
+        }
+
+        [HttpGet]
+        [Route("Produit/Produit-par-piece-recherche")]
+        public async Task<ActionResult> ProduitParPieceRecherche()
+        {
+            var pieces = (List<Piece>)await _requetePiece.GetAllAsync();
+
+            ViewBag.PieceList = new SelectList(pieces, "Id", "Nom");
+
+            return View();
+        }
+        [HttpPost]
+        [Route("Produit/Produit-par-piece")]
+        public async Task<ActionResult> ProduitParPiece(Produit idPiece)
+        {
+            var res = Bdd.Produits.Join(Bdd.Pieces.Where(p=>p.Id==idPiece.PieceId),
+                                    pro => pro.PieceId,
+                                    pie => pie.Id,
+                                    (pro, pie) => new { ProduitNom = pro.Nom, PieceNom = pie.Nom}).ToList();
+
+            List<Tuple<string, string>> list = new List<Tuple<string, string>>();
+            
+            foreach (var element in res)
+            {
+                list.Add(new Tuple<string, string>(element.ProduitNom,element.PieceNom));
+            }
+            
+            ViewBag.ResList = list;
+
+            return View();
         }
 
     }

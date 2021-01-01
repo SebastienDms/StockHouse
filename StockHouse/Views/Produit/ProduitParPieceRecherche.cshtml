@@ -1,0 +1,17 @@
+﻿@model StockHouse.Models.Produit
+
+@{
+    ViewBag.Title = "ProduitParPieceRecherche";
+}
+
+<h2>ProduitParPieceRecherche</h2>
+
+@using (Html.BeginForm("ProduitParPiece", "Produit", FormMethod.Post))
+{
+    <div class="form-group">
+        <label>Id:</label>
+        @Html.DropDownListFor(p => p.PieceId, ViewBag.PieceList as SelectList, "--Select piece--")
+        @Html.ValidationMessageFor(p => p.Id)
+    </div>
+    <button type="submit" class="btn btn-primary">Chercher</button>
+}
