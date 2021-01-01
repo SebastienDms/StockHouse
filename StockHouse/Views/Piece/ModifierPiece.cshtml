@@ -9,11 +9,14 @@
 {
     <div class="form-group">
         <label>ID:</label>
+        <br/>
         @Html.TextBoxFor(p => p.Id, new { @value = Model.Id, @readonly = "true" })
     </div>
     <div class="form-group">
         <label>Nom:</label>
+        <br/>
         @Html.TextBoxFor(p => p.Nom, new { @value = Model.Nom })
+        <br/>
         @Html.ValidationMessageFor(p => p.Nom)
     </div>
     <button type="submit" class="btn btn-primary">Modifier</button>

@@ -9,17 +9,23 @@
 {
     <div class="form-group">
         <label>Nom:</label>
+        <br/>
         @Html.TextBoxFor(p => p.Nom, new { @value = Model.Nom })
+        <br/>
         @Html.ValidationMessageFor(p => p.Nom)
     </div>
     <div>
         <label>Adresse:</label>
+        <br/>
         @Html.TextBoxFor(p => p.Adresse, new { @value = Model.Adresse })
+        <br/>
         @Html.ValidationMessageFor(p => p.Adresse)
     </div>
     <div>
         <label>Ville:</label>
+        <br/>
         @Html.TextBoxFor(p => p.Ville, new { @value = Model.Ville })
+        <br/>
         @Html.ValidationMessageFor(p => p.Ville)
     </div>
     <button type="submit" class="btn btn-primary">Ajouter</button>

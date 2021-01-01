@@ -11,22 +11,27 @@
 {
     <div class="form-group">
         <label>Nom:</label>
+        <br/>
         @Html.TextBoxFor(p => p.Nom)
     </div>
     <div>
         <label>Marque:</label>
+        <br/>
         @Html.TextBoxFor(p => p.Marque)
     </div>
     <div>
         <label>Type:</label>
+        <br/>
         @Html.TextBoxFor(p => p.Type)
     </div>
     <div>
         <label>Stock:</label>
+        <br/>
         @Html.TextBoxFor(p => p.Stock)
     </div>
     <div>
         <label>Pièce:</label>
+        <br/>
         @Html.DropDownListFor(p=>p.PieceId, ViewBag.PieceList as SelectList,"--Select piece--")
     </div>
     <button type="submit" class="btn btn-primary">Ajouter</button>

@@ -1,0 +1,42 @@
+﻿<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">Menu</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                @Html.ActionLink("Accueil", "Index", "Home", "{controller}/{action}/{id}", new { @class = "nav-link" })
+            </li>
+            <li class="nav-item">
+                @Html.ActionLink("À propos de", "About", "Home", "{controller}/{action}/{id}", new { @class = "nav-link" })
+            </li>
+            <li>
+                @Html.ActionLink("Contact", "Contact", "Home", "{controller}/{action}/{id}", new { @class = "nav-link" })
+            </li>
+            <li>
+                @Html.ActionLink("Pièces", "Index", "Piece", "Piece/Index", new { @class = "nav-link" })
+            </li>
+            <li>
+                @Html.ActionLink("Produits", "Index", "Produit", "Produit/Index", new { @class = "nav-link" })
+            </li>
+            <li>
+                @Html.ActionLink("Magasins", "Index", "Magasin", "Magasin/Index", new { @class = "nav-link" })
+            </li>
+            <li>
+                @Html.ActionLink("Achats", "Index", "Achat", "Achat/Index", new { @class = "nav-link" })
+            </li>
+            <li>
+                @Html.ActionLink("Utilisateurs", "Index", "User", "User/Index", new { @class = "nav-link" })
+            </li>
+        </ul>
+        <div class="my-2 my-lg-0">
+            <form class="form-inline my-2 my-lg-0">
+                <label class="form-control mr-sm-2">Bienvenue @User.Identity.Name</label>
+                @Html.ActionLink("Se déconnecter", "Logout", "Account", "Account/Logout",
+                    new {@class = "btn btn-outline-danger my-2 my-sm-0"})
+            </form>
+        </div>
+    </div>
+</nav>

@@ -1,0 +1,24 @@
+﻿<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">Menu</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                @Html.ActionLink("Accueil", "Index", "Home", "{controller}/{action}/{id}", new { @class = "nav-link" })
+            </li>
+            <li class="nav-item">
+                @Html.ActionLink("À propos de", "About", "Home", "{controller}/{action}/{id}", new { @class = "nav-link" })
+            </li>
+            <li>
+                @Html.ActionLink("Contact", "Contact", "Home", "{controller}/{action}/{id}", new { @class = "nav-link" })
+            </li>
+        </ul>
+        <div class="my-2 my-lg-0">
+            @Html.ActionLink("Se connecter", "Login", "Account", "Account/Login",
+                new {@class = "btn btn-outline-success my-2 my-sm-0"})
+        </div>
+    </div>
+</nav>

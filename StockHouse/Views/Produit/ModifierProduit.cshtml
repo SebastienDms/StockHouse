@@ -10,31 +10,41 @@
 {
     <div class="form-group">
         <label>ID:</label>
+        <br/>
         @Html.TextBoxFor(p => p.Id, new { @value = Model.Id, @readonly = "true" })
+        <br/>
         @Html.ValidationMessageFor(p => p.Id)
 
     </div>
     <div class="form-group">
         <label>Nom:</label>
+        <br/>
         @Html.TextBoxFor(p => p.Nom, new { @value = Model.Nom })
+        <br/>
         @Html.ValidationMessageFor(p => p.Nom)
     </div>
     <div>
         <label>Marque:</label>
+        <br/>
         @Html.TextBoxFor(p => p.Marque, new { @value = Model.Marque })
     </div>
     <div>
         <label>Type:</label>
+        <br/>
         @Html.TextBoxFor(p => p.Type, new { @value = Model.Type })
     </div>
     <div>
         <label>Stock:</label>
+        <br/>
         @Html.TextBoxFor(p => p.Stock, new { @value = Model.Stock })
+        <br/>
         @Html.ValidationMessageFor(p => p.Stock)
     </div>
     <div>
         <label>Pièce:</label>
+        <br/>
         @Html.DropDownListFor(p => p.PieceId, ViewBag.PieceList as SelectList, "--Select piece--")
+        <br/>
         @Html.ValidationMessageFor(p => p.PieceId)
     </div>
     <button type="submit" class="btn btn-primary">Modifier</button>

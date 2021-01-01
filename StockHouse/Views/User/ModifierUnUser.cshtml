@@ -10,22 +10,27 @@
 {
     <div class="form-group">
         <label>ID:</label>
+        <br/>
         @Html.TextBoxFor(p => p.Id, new { @value = Model.Id, @readonly = "true" })
     </div>
     <div class="form-group">
         <label>Nom:</label>
+        <br/>
         @Html.TextBoxFor(p => p.Nom, new { @value = Model.Nom })
     </div>
     <div>
         <label>Adresse:</label>
+        <br/>
         @Html.TextBoxFor(p => p.AdresseMail, new { @value = Model.AdresseMail })
     </div>
     <div>
         <label>Ville:</label>
+        <br/>
         @Html.TextBoxFor(p => p.MotDePasse, new { @value = Model.MotDePasse })
     </div>
     <div>
         <label>Ville:</label>
+        <br/>
         @Html.TextBoxFor(p => p.Role, new { @value = Model.Role })
     </div>
 

@@ -10,7 +10,9 @@
 {
     <div class="form-group">
         <label>Id:</label>
+        <br/>
         @Html.TextBoxFor(p => p.Id)
+        <br/>
         @Html.ValidationMessageFor(p => p.Id)
     </div>
     <button type="submit" class="btn btn-primary">Chercher</button>

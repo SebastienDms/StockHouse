@@ -10,22 +10,26 @@
 {
     <div class="form-group">
         <label>Nom:</label>
+        <br/>
         @Html.TextBoxFor(p => p.Nom)
+        <br/>
         @Html.ValidationMessageFor(p=>p.Nom)
     </div>
     <div>
         <label>E-mail:</label>
+        <br/>
         @Html.TextBoxFor(p => p.AdresseMail)
+        <br/>
         @Html.ValidationMessageFor(p=>p.AdresseMail)
     </div>
     <div>
         <label>Mot de passe:</label>
+        <br/>
         @Html.TextBoxFor(p => p.MotDePasse)
+        <br/>
         @Html.ValidationMessageFor(p=>p.MotDePasse)
     </div>
     <div>
-        @*<label>Ville:</label>*@
-        @*@Html.TextBoxFor(p => p.Role)*@
         @Html.HiddenFor(p=>p.Role, new {@value="Membre"})
     </div>
     <button type="submit" class="btn btn-primary">Créer</button>

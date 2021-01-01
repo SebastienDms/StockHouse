@@ -10,28 +10,34 @@
 {
     <div class="form-group">
         <label>Prix:</label>
+        <br/>
         @Html.TextBoxFor(p => p.Prix)
     </div>
     <div class="form-group">
         <label>Quantité:</label>
+        <br/>
         @Html.TextBoxFor(p => p.Quantité)
     </div>
     <div class="form-group">
         <label>Date d'achat:</label>
+        <br/>
         @Html.TextBoxFor(p => p.DateAchat)
     </div>
     <div class="form-group">
         <label>ID user:</label>
+        <br/>
         @Html.DropDownListFor(p => p.UserId, ViewBag.UserList as SelectList, "--Select user--")
 
     </div>
     <div class="form-group">
         <label>ID magasin:</label>
+        <br/>
         @Html.DropDownListFor(p => p.MagasinId, ViewBag.MagasinList as SelectList, "--Select shop--")
 
     </div>
     <div class="form-group">
         <label>ID produit:</label>
+        <br/>
         @Html.DropDownListFor(p => p.ProduitId, ViewBag.ProduitsList as SelectList, "--Select product--")
 
     </div>
