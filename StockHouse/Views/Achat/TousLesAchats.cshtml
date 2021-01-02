@@ -11,12 +11,12 @@
     <thead>
         <tr>
             <th scope="col">#</th>
+            <th scope="col">ID produit</th>
             <th scope="col">Prix</th>
             <th scope="col">Quantité</th>
             <th scope="col">Date d'achat</th>
-            <th scope="col">ID user</th>
             <th scope="col">ID magasin</th>
-            <th scope="col">ID produit</th>
+            <th scope="col">ID user</th>
         </tr>
     </thead>
     <tbody>
@@ -24,12 +24,12 @@
     {
         <tr>
             <th scope="row">@achat.Id</th>
+            <td>@achat.ProduitId</td>
             <td>@achat.Prix</td>
             <td>@achat.Quantité</td>
             <td>@achat.DateAchat</td>
-            <td>@achat.UserId</td>
             <td>@achat.MagasinId</td>
-            <td>@achat.ProduitId</td>
+            <td>@achat.UserId</td>
         </tr>
     }
     </tbody>

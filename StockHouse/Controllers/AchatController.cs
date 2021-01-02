@@ -57,8 +57,18 @@ namespace StockHouse.Controllers
             }
             else
             {
+                var prod = await _requetesP.GetByIdAsync(newAchat.ProduitId);
+
+                prod.Stock += newAchat.Quantité;
+
+                var res = await _requetesP.UpdateAsync(prod);
+
+                if (res==0)
+                {
+                    
+                }
+
                 await _requetesA.AddAsync(newAchat);
-                //var id = await _requetesA.Save();
 
                 return RedirectToAction("Index", "Achat");
             }
