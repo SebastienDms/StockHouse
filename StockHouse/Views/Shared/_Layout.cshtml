@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - Mon application ASP.NET</title>
@@ -9,82 +9,21 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="#">Menu:</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
+@if (User.Identity.IsAuthenticated)
+{
+    @Html.Partial("_NavBarMember")
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-                @Html.ActionLink("Accueil", "Index", "Home", "{controller}/{action}/{id}", new { @class = "nav-link" })
-            </li>
-            <li class="nav-item">
-                @Html.ActionLink("À propos de", "About", "Home", "{controller}/{action}/{id}", new { @class = "nav-link" })
-            </li>
-            <li>
-                @Html.ActionLink("Contact", "Contact", "Home", "{controller}/{action}/{id}", new { @class = "nav-link" })
-            </li>
-            <li>
-                @Html.ActionLink("Pièces", "Index", "Piece", "Piece/Index", new { @class = "nav-link" })
-            </li>
-            <li>
-                @Html.ActionLink("Produits", "Index", "Produit", "Produit/Index", new { @class = "nav-link" })
-            </li>
-            <li>
-                @Html.ActionLink("Magasins", "Index", "Magasin", "Magasin/Index", new { @class = "nav-link" })
-            </li>
-            <li>
-                @Html.ActionLink("Achats", "Index", "Achat", "Achat/Index", new { @class = "nav-link" })
-            </li>
-            <li>
-                @Html.ActionLink("Utilisateurs", "Index", "User", "User/Index", new { @class = "nav-link" })
-            </li>
-
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Sous-menu
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    @Html.ActionLink("Action1", "Index", "{controller}/{action}/{id}", new { @class = "dropdown-item" })
-                    @Html.ActionLink("Action2", "About", "{controller}/{action}/{id}", new { @class = "dropdown-item" })
-                    @*<div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Something else here</a>*@
-                </div>
-            </li>
-        </ul>
-        <div class="my-2 my-lg-0">
-            @*@Html.ActionLink("S'enregistrer", "RegisterPage", "User", "Register-page", new { @class = "nav-link" })*@
-            @if(User.Identity.IsAuthenticated)
-             {
-                 <form class="form-inline my-2 my-lg-0">
-                     <label class="form-control mr-sm-2">Bienvenue @User.Identity.Name</label>
-                     @Html.ActionLink("Se déconnecter","Logout","Account", "Account/Logout",
-                         new { @class = "btn btn-outline-danger my-2 my-sm-0" })
-                 </form>
-                 @*<div class="mr-sm-2">Bienvenue @User.Identity.Name</div>*@
-             }
-            else
-            {
-                @Html.ActionLink("Se connecter","Login","Account","Account/Login",
-                    new { @class= "btn btn-outline-success my-2 my-sm-0" })
-            }
-        </div>
-        @*<form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>*@
-    </div>
-</nav>
+}
+else
+{
+    @Html.Partial("_NavBarAnonymous")
+}
 <div class="container body-content">
     @RenderBody()
     <hr />
-    <footer>
-        <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-    </footer>
+    @Html.Partial("_Footer")
 </div>
-    
+
 @Scripts.Render("https://kit.fontawesome.com/68acae4853.js")
 @Scripts.Render("~/bundles/jquery")
 @Scripts.Render("~/bundles/bootstrap")

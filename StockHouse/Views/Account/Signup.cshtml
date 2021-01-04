@@ -6,10 +6,10 @@
 
 <h2>Signup</h2>
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>User</h4>
         <hr />
@@ -48,7 +48,9 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Créer" class="btn btn-default" />
+                <button type="submit" class="btn btn-success">
+                    Créer<i class="fas fa-plus pl-2"></i>
+                </button>
             </div>
         </div>
     </div>

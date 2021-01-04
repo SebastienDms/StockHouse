@@ -9,6 +9,7 @@ using StockHouse.Requetes;
 
 namespace StockHouse.Controllers
 {
+    [Authorize]
     public class AchatController : Controller
     {
         private BdStockHouse db = new BdStockHouse();
@@ -48,6 +49,7 @@ namespace StockHouse.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         [Route("Achat/Ajouter-un-achat")]
         public async Task<ActionResult> AjouterUnAchat(Achat newAchat)
         {
@@ -72,6 +74,7 @@ namespace StockHouse.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         [Route("Achat/Modifier-un-achat")]
         public async Task<ActionResult> ModifierUnAchat(Achat wantedAchat)
         {
@@ -94,6 +97,7 @@ namespace StockHouse.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<ActionResult> ModifierAchat(Achat modifAchat)
         {
             if (!ModelState.IsValid)
@@ -124,6 +128,7 @@ namespace StockHouse.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<ActionResult> SupprimerAchat(int idSupprimer)
         {
             await _requetesA.DeleteAsync(idSupprimer);

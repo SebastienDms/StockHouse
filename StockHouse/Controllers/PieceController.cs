@@ -9,6 +9,7 @@ using StockHouse.Requetes;
 
 namespace StockHouse.Controllers
 {
+    [Authorize]
     public class PieceController : Controller
     {
         private readonly Requete<Piece> _requetes = new Requete<Piece>();

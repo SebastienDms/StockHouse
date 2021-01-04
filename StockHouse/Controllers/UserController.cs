@@ -12,6 +12,7 @@ using StockHouse.Requetes;
 
 namespace StockHouse.Controllers
 {
+    [Authorize]
     public class UserController : Controller
     {
         private readonly Requete<User> _requetes = new Requete<User>();

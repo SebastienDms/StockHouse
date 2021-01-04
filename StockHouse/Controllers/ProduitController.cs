@@ -9,6 +9,7 @@ using StockHouse.Requetes;
 
 namespace StockHouse.Controllers
 {
+    [Authorize]
     public class ProduitController : Controller
     {
         protected readonly BdStockHouse Bdd = new BdStockHouse();

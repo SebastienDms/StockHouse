@@ -392,6 +392,9 @@
     <Content Include="Views\Account\Signup.cshtml" />
     <Content Include="Views\Produit\ProduitParPieceRecherche.cshtml" />
     <Content Include="Views\Produit\ProduitParPiece.cshtml" />
+    <Content Include="Views\Shared\_Footer.cshtml" />
+    <Content Include="Views\Shared\_NavBarAnonymous.cshtml" />
+    <Content Include="Views\Shared\_NavBarMember.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
