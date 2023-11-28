@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - Mon application ASP.NET</title>
@@ -9,24 +9,24 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-@if (User.Identity.IsAuthenticated)
-{
-    @Html.Partial("_NavBarMember")
+    @if (User.Identity.IsAuthenticated)
+    {
+        @Html.Partial("_NavBarMember")
 
-}
-else
-{
-    @Html.Partial("_NavBarAnonymous")
-}
-<div class="container body-content">
-    @RenderBody()
-    <hr />
-    @Html.Partial("_Footer")
-</div>
+    }
+    else
+    {
+        @Html.Partial("_NavBarAnonymous")
+    }
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        @Html.Partial("_Footer")
+    </div>
 
-@Scripts.Render("https://kit.fontawesome.com/68acae4853.js")
-@Scripts.Render("~/bundles/jquery")
-@Scripts.Render("~/bundles/bootstrap")
-@RenderSection("scripts", required: false)
+    @Scripts.Render("https://kit.fontawesome.com/68acae4853.js")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
 </body>
 </html>

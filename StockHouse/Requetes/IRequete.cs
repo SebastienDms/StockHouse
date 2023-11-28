@@ -1,7 +1,7 @@
 ﻿namespace StockHouse.Requetes
 {
-    public interface IRequete
-    {
-        void Dispose();
-    }
+  public interface IRequete
+  {
+    void Dispose();
+  }
 }
